@@ -8,7 +8,11 @@ const WrapperStyles = styled.div`
   flex-direction: row;
   height: 100vh;
   margin-top: 0;
-`
+  div {
+    flex: 1 1 0;
+    text-align: center;
+  }
+`;
 
 export default function Product() {
   return(
