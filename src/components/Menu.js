@@ -1,17 +1,20 @@
-import React from "react";
+import { forwardRef, React, useRef, useState } from "react";
 import styled from "styled-components";
 import CartImage from '../images/icon-cart.svg';
 import AvatarImage from '../images/image-avatar.JPG';
 import Logo from '../images/logo.svg';
+import Hamburger from '../images/icon-menu.svg';
 
 const NavbarStyles = styled.nav`
     background: white;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    width: 95vh;
     align-items: center;
     border-bottom: 1px solid var(--lightboxBlack);
+    @media only screen and (max-width: 920px) {
+      display: flex;
+    }
 `;
 
 const OuterDivStyles = styled.div`
@@ -52,6 +55,40 @@ const OuterDivStyles = styled.div`
       width: auto;
       height: 30px;
     }
+    .hamburger {
+      display: none;
+    }
+    .dropDown {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: var(--greyishBlue);
+      border-radius: 4px;
+      box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      top: -1000px;
+    }
+    .open {
+      opacity: 1 !important;
+      top: 80px !important;
+      margin-right: 70px;
+    }
+    @media only screen and (max-width: 920px) {
+      display: flex;
+      .hamburger {
+        display: flex;
+      }
+      .logoHeader {
+        display: flex;
+        flex: 1 1 auto;
+      }
+      .cartAccountHeader {
+        display: flex;
+        flex: 1 1 0;
+      }
+    }
 `;
 
 const InnerDivStyles = styled.div`
@@ -69,14 +106,56 @@ const InnerDivStyles = styled.div`
     text-decoration-color: var(--orange);
     text-decoration-thickness: 3px;
   }
+  @media only screen and (max-width: 920px) {
+    display: none;
+  }
+`;
+
+const HamburgerStyles = styled.div`
+  display: none;
+  @media only screen and (max-width: 920px) {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: auto;
+      height: 30px;
+    }
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default function Menu() {
+  function handleClick() {
+    const dropdownShow = document.querySelector('.dropDown');
+    dropdownShow.classList.add('open');
+  }
+
+  // const cartDropdown = useRef(null);
+  // const [openSlide, setOpenSlide] = useState('');
+  // const closeDropdown = (e) => {
+  //   if(cartDropdown.current && openSlide && !cartDropdown.current.contains(e.target)) {
+  //     setOpenSlide(false);
+  //   }
+  // }
+  // document.addEventListener('mousedown', closeDropdown);
+  // https://codesandbox.io/s/react-withclickoutside-forked-bok38?fontsize=14&hidenavigation=1&theme=dark&file=/src/withClickOutside.js
+
   return(
     <NavbarStyles>
+      <HamburgerStyles>
+        <button>
+          <img src={Hamburger} alt="menuicon"/>
+        </button>
+      </HamburgerStyles>
       <OuterDivStyles>
         <a href="#" className="header-link">
-          <h1>
+          <h1 className="logoHeader">
             <img src={Logo} alt="logo" className="logo"/>
           </h1>
         </a>
@@ -99,8 +178,11 @@ export default function Menu() {
         </a>
       </InnerDivStyles>
       <OuterDivStyles>
-        <a href="#">
-          <span>
+        <div className="dropDown">
+          <div>item</div>
+        </div>
+        <a href="#" onClick={handleClick}>
+          <span className="cartAccountHeader">
             <img src={CartImage} alt="cart" className="cart"/>
           </span>
         </a>
