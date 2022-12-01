@@ -1,4 +1,4 @@
-import { forwardRef, React, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import CartImage from '../images/icon-cart.svg';
 import AvatarImage from '../images/image-avatar.JPG';
@@ -24,6 +24,9 @@ const OuterDivStyles = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 20px;
+    div {
+      cursor: pointer;
+    }
     h1 {
       margin: 0;
       font-size: 40px;
@@ -58,7 +61,7 @@ const OuterDivStyles = styled.div`
     .hamburger {
       display: none;
     }
-    .dropDown {
+    .menu {
       position: absolute;
       width: 100px;
       height: 100px;
@@ -68,12 +71,17 @@ const OuterDivStyles = styled.div`
       display: flex;
       justify-content: center;
       opacity: 0;
-      top: -1000px;
+      visibility: hidden;
     }
-    .open {
-      opacity: 1 !important;
-      top: 80px !important;
+    .menu.active {
+      opacity: 1;
+      top: 80px;
       margin-right: 70px;
+      visibility: visible;
+      position: absolute;
+    }
+    .menu {
+      position: absolute;
     }
     @media only screen and (max-width: 920px) {
       display: flex;
@@ -131,20 +139,26 @@ const HamburgerStyles = styled.div`
 `;
 
 export default function Menu() {
-  function handleClick() {
-    const dropdownShow = document.querySelector('.dropDown');
-    dropdownShow.classList.add('open');
-  }
-
-  // const cartDropdown = useRef(null);
-  // const [openSlide, setOpenSlide] = useState('');
-  // const closeDropdown = (e) => {
-  //   if(cartDropdown.current && openSlide && !cartDropdown.current.contains(e.target)) {
-  //     setOpenSlide(false);
-  //   }
-  // }
-  // document.addEventListener('mousedown', closeDropdown);
-  // https://codesandbox.io/s/react-withclickoutside-forked-bok38?fontsize=14&hidenavigation=1&theme=dark&file=/src/withClickOutside.js
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  
+  const onClick = () => setIsActive(true);
+  
+  useEffect(() => {
+    function pageClickEvent(e) {
+      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
+        setIsActive(false);
+        console.log(dropdownRef);
+      }
+    }
+    
+    if(isActive) {
+      document.addEventListener('click', pageClickEvent);
+    }
+    return () => {
+      document.removeEventListener('click', pageClickEvent);
+    }
+  }, [isActive])
 
   return(
     <NavbarStyles>
@@ -178,14 +192,16 @@ export default function Menu() {
         </a>
       </InnerDivStyles>
       <OuterDivStyles>
-        <div className="dropDown">
-          <div>item</div>
-        </div>
-        <a href="#" onClick={handleClick}>
-          <span className="cartAccountHeader">
+        <div ref={dropdownRef}>
+          <button onClick={onClick}>
             <img src={CartImage} alt="cart" className="cart"/>
-          </span>
-        </a>
+          </button>
+          <nav className={`menu ${isActive ? 'active' : 'inactive'}`}>
+            <ul>
+              <li>Item</li>
+            </ul>
+          </nav>
+        </div>
         <a href="#">
           <img src={AvatarImage} alt="avatar" className="avatar"/>
         </a>
