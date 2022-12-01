@@ -32,7 +32,7 @@ const OuterDivStyles = styled.div`
       font-size: 40px;
     }
     a {
-      padding: 10px;
+      /* padding: 10px; */
     }
     .header-link {
       text-decoration: none;
@@ -139,26 +139,30 @@ const HamburgerStyles = styled.div`
 `;
 
 export default function Menu() {
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef(null); // initial ref is null but we pass our ref to our div element below, so dropdownRef.current will be our div
   const [isActive, setIsActive] = useState(false);
   
-  const onClick = () => setIsActive(true);
+  // on button click change the state
+  const onClick = () => setIsActive(!isActive);
   
   useEffect(() => {
     function pageClickEvent(e) {
+      // if ref is not null and click happens outside of our ref.current element
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
-        setIsActive(false);
-        console.log(dropdownRef);
+        // reverse active state (it will be set to false because we want to hide our menu)
+        setIsActive(!isActive);
+        console.log(dropdownRef.current);
       }
     }
     
     if(isActive) {
       document.addEventListener('click', pageClickEvent);
     }
+    // remove the event listener and return the function, unless the click occurs on the ref element
     return () => {
       document.removeEventListener('click', pageClickEvent);
     }
-  }, [isActive])
+  }, [isActive]);
 
   return(
     <NavbarStyles>
@@ -202,9 +206,9 @@ export default function Menu() {
             </ul>
           </nav>
         </div>
-        <a href="#">
-          <img src={AvatarImage} alt="avatar" className="avatar"/>
-        </a>
+        <div>
+            <img src={AvatarImage} alt="avatar" className="avatar"/>
+        </div>
       </OuterDivStyles>
     </NavbarStyles>
   );
