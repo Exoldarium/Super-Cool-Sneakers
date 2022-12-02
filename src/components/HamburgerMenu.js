@@ -1,0 +1,92 @@
+import { useRef } from "react";
+import styled from "styled-components";
+import Hamburger from '../images/icon-menu.svg';
+import { useDetectOutsideClick } from "../useDetectOutsideClick";
+
+const HamburgerStyles = styled.div`
+  display: none;
+  @media only screen and (max-width: 790px) {
+    display: flex;
+    flex: 1 1 0;
+    .hamburger {
+      position: absolute;
+      width: 25vh;
+      /* height: 100vh; */
+      background: var(--greyishBlue);
+      border-radius: 4px;
+      border: 1px solid var(--lightboxBlack);
+      box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      right: 0.1em;
+      margin: 0;
+      align-items: center;
+    }
+    .hamburger.active {
+      opacity: 1;
+      top: 2.3em;
+      /* margin-right: 20em; */
+      visibility: visible;
+      position: absolute;
+      float: left;
+      display: flex;
+    }
+    img {
+      width: auto;
+      height: 30px;
+    }
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+`;
+
+export default function HamburgerMenu() {
+  const dropdownRef = useRef(null); // initial ref is null but we pass our ref to our div element below, so dropdownRef.current will be our div
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false); // we add our hook
+  const onClick = () => setIsActive(!isActive); // on button click change the state
+
+  return (
+    <HamburgerStyles>
+      {/* only shows under 790px screen size */}
+      <div ref={dropdownRef}>
+      <button onClick={onClick}>
+        <img src={Hamburger} alt="menuicon"/>
+      </button>
+        <nav className={`hamburger ${isActive ? 'active' : 'inactive'}`}>
+          <ul>
+            <li>        
+              <a href="#">
+                <span>Collections</span>
+              </a>
+            </li>
+            <li>        
+              <a href="#">
+                <span>Collections</span>
+              </a>
+            </li>
+            <li>        
+              <a href="#">
+                <span>Collections</span>
+              </a>
+            </li>
+            <li>        
+              <a href="#">
+                <span>Collections</span>
+              </a>
+            </li>
+            <li>        
+              <a href="#">
+                <span>Collections</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </HamburgerStyles>
+  )
+}
