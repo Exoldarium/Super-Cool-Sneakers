@@ -7,9 +7,10 @@ const HamburgerStyles = styled.div`
   display: none;
   @media only screen and (max-width: 790px) {
     display: flex;
+    position: relative;
     flex: 1 1 0;
     .hamburger {
-      position: absolute;
+      position: fixed;
       width: 25vh;
       /* height: 100vh; */
       background: var(--greyishBlue);
@@ -20,17 +21,14 @@ const HamburgerStyles = styled.div`
       justify-content: center;
       opacity: 0;
       visibility: hidden;
-      right: 0.1em;
       margin: 0;
       align-items: center;
     }
     .hamburger.active {
       opacity: 1;
       top: 2.3em;
-      /* margin-right: 20em; */
       visibility: visible;
       position: absolute;
-      float: left;
       display: flex;
     }
     img {
@@ -66,22 +64,22 @@ export default function HamburgerMenu() {
             </li>
             <li>        
               <a href="#">
-                <span>Collections</span>
+                <span>Men</span>
               </a>
             </li>
             <li>        
               <a href="#">
-                <span>Collections</span>
+                <span>Women</span>
               </a>
             </li>
             <li>        
               <a href="#">
-                <span>Collections</span>
+                <span>About</span>
               </a>
             </li>
             <li>        
               <a href="#">
-                <span>Collections</span>
+                <span>Contact</span>
               </a>
             </li>
           </ul>
