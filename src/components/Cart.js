@@ -5,6 +5,8 @@ import CartImage from '../images/icon-cart.svg';
 
 const CartStyles = styled.div`
   margin: 0;
+  max-width: 2em;
+  position: relative;
   .cart {
     height: 35px;
     width: 35px;
@@ -23,28 +25,34 @@ const CartStyles = styled.div`
     width: auto;
     margin-right: 5px;
   }
-  .menu {
+  .cart-menu {
     position: absolute;
     width: 100px;
     height: 100px;
+    top: 2.5em;
+    right: 0.1em;
     background: var(--greyishBlue);
     border-radius: 4px;
     box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-    display: flex;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
     border: 1px solid var(--lightboxBlack);
+    width: 8em;
   }
-  .menu.active {
+  .cart-menu.active {
     opacity: 1;
-    top: 80px;
-    margin-right: 70px;
     visibility: visible;
-    position: absolute;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
   }
   @media only screen and (max-width: 790px) {
-    .menu {
+    .cart-menu {
       position: absolute;
       width: 25vh;
       height: 100vh;
@@ -53,21 +61,18 @@ const CartStyles = styled.div`
       border: 1px solid var(--lightboxBlack);
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
       display: flex;
-      justify-content: center;
       opacity: 0;
       visibility: hidden;
-      right: 0.1em;
+      right: -2.6em;
       margin: 0;
+      top: 2.1em;
       align-items: center;
+      justify-content: flex-start;
     }
-    .menu.active {
+    .cart-menu.active {
       opacity: 1;
-      top: 3em;
       margin-right: 0;
       visibility: visible;
-      position: absolute;
-      display: flex;
-      justify-content: flex-start;
     }
     ul {
       height: 100vh;
@@ -91,10 +96,10 @@ export default function Cart() {
         <button onClick={onClick}>
           <img src={CartImage} alt="cart" className="cart"/>
         </button>
-        <nav className={`menu ${isActive ? 'active' : 'inactive'}`}>
-        <ul>
-          <li>Item</li>
-        </ul>
+        <nav className={`cart-menu ${isActive ? 'active' : 'inactive'}`}>
+          <ul>
+            <li>Item</li>
+          </ul>
         </nav>
       </div>
     </CartStyles>

@@ -9,7 +9,7 @@ const HamburgerStyles = styled.div`
     display: flex;
     position: relative;
     flex: 1 1 0;
-    .hamburger {
+    .hamburger-menu {
       position: absolute;
       width: 25vh;
       background: var(--greyishBlue);
@@ -23,7 +23,7 @@ const HamburgerStyles = styled.div`
       margin: 0;
       align-items: center;
     }
-    .hamburger.active {
+    .hamburger-menu.active {
       opacity: 1;
       top: 2.3em;
       visibility: visible;
@@ -64,7 +64,7 @@ export default function HamburgerMenu() {
       <button onClick={onClick}>
         <img src={Hamburger} alt="menuicon"/>
       </button>
-        <nav className={`hamburger ${isActive ? 'active' : 'inactive'}`}>
+        <nav className={`hamburger-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
             <li>        
               <a href="#">
