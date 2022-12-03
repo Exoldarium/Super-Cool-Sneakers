@@ -47,7 +47,7 @@ const CartStyles = styled.div`
     .menu {
       position: absolute;
       width: 25vh;
-      /* height: 100vh; */
+      height: 100vh;
       background: var(--greyishBlue);
       border-radius: 4px;
       border: 1px solid var(--lightboxBlack);
@@ -67,6 +67,15 @@ const CartStyles = styled.div`
       visibility: visible;
       position: absolute;
       display: flex;
+      justify-content: flex-start;
+    }
+    ul {
+      height: 100vh;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding-right: 0.3em;
+      justify-content: flex-start;
     }
   }
 `;

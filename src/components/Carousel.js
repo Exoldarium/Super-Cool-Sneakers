@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { productImages } from '../data';
 
@@ -45,11 +46,25 @@ const ImageDivStyles = styled.div`
 `;
 
 export default function Carousel() {
+  const [isActive, setIsActive] = useState('');
+
+  useEffect(() => {
+    const smallImage = document.querySelectorAll('.smallImage');
+    const bigImage = document.querySelector('.bigImage');
+    bigImage.src = productImages[0].imageOne;
+    function imageClick(e) {
+      if(e.target) {
+        setIsActive(e.target.src);
+      }
+    }
+    smallImage.forEach(img => img.addEventListener('click', imageClick));
+  }, [])
+
   return (
     <ImageDivStyles>
       {productImages.map(img => (
         <div key={img}>
-          <img src={img.imageOne} key={img.imageOne} alt="coolShoes" className="bigImage"/>
+          <img src={isActive} key={img.imageOne} alt="coolShoes" className="bigImage"/>
         </div>
       ))}
       {productImages.map(img => (

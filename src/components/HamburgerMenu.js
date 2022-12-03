@@ -10,9 +10,8 @@ const HamburgerStyles = styled.div`
     position: relative;
     flex: 1 1 0;
     .hamburger {
-      position: fixed;
+      position: absolute;
       width: 25vh;
-      /* height: 100vh; */
       background: var(--greyishBlue);
       border-radius: 4px;
       border: 1px solid var(--lightboxBlack);
@@ -30,6 +29,7 @@ const HamburgerStyles = styled.div`
       visibility: visible;
       position: absolute;
       display: flex;
+      justify-content: flex-start;
     }
     img {
       width: auto;
@@ -39,6 +39,15 @@ const HamburgerStyles = styled.div`
       background: none;
       border: none;
       cursor: pointer;
+    }
+    ul {
+      height: 100vh;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-left: 0.3em;
     }
   }
 `;

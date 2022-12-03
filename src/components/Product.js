@@ -21,7 +21,7 @@ const WrapperStyles = styled.div`
     div {
       flex: 1 1 0;
       text-align: center;
-  }
+    }
   }
 `;
 
