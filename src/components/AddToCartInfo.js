@@ -36,7 +36,8 @@ const InfoDivStyles = styled.div`
     margin: 0;
   }
   @media only screen and (max-width: 790px) {
-    display: block;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: left;
@@ -120,6 +121,7 @@ export default function AddToCartInfo() {
   const [inputStateM, setStateInputM] = useState('+');
   const [inputStateS, setStateInputS] = useState('-');
   const [cartInput, setCartInput] = useState('Add to Cart');
+  // put images to inputs with css
 
   return (
     <InfoDivStyles>

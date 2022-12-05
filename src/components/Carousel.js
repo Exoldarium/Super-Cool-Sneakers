@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { productImages } from '../data';
 import closeMenu from '../images/icon-close.svg';
+import nextButton from '../images/icon-next.svg';
+import previousButton from '../images/icon-previous.svg';
 
 const ImageDivStyles = styled.div`
   .smallImageDiv {
@@ -24,11 +26,8 @@ const ImageDivStyles = styled.div`
     cursor: pointer;
   }
   @media only screen and (max-width: 790px) {
-    .smallImageDiv {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+    .smallImageDiv{
+      display: none;
     }
     .bigImage {
       width: auto;
@@ -62,9 +61,7 @@ const OverlayStyles = styled.div`
   }
   .closeMenu {
     position: absolute;
-    margin-left: 43em;
-    border-radius: 5px;
-    border: none;
+    margin-left: 42.8em;
     cursor: pointer;
   }
   .overlayBigImage {
@@ -73,16 +70,49 @@ const OverlayStyles = styled.div`
     border-radius: 10px;
     cursor: pointer;
   }
+  .nextButton {
+    position: absolute;
+    margin-top: 20em;
+    margin-left: 45em;
+  }
+  .previousButton {
+    position: absolute;
+    margin-top: 20em;
+    margin-left: -2em;
+  }
   @media only screen and (max-width: 790px) {
     display: none;
   }
 `;
 
 export default function Carousel() {
-  const [imageActive, setImageActive] = useState(productImages[0].imageOne);
+  // set active image
+  const [imageActive, setImageActive] = useState(productImages[0].image);
+  // set overlay image id
+  const [nextImage, setNextImage] = useState(0);
+  // set overlay image
   const [isOverlay, setOverlay] = useState(false);
-  const onClick= () => setOverlay(!isOverlay);
+  const onClick = () => setOverlay(!isOverlay);
+ 
+  // scroll images forward
+  function nextImageOnClick() {
+    if(nextImage === 3) {
+      setNextImage(0);
+    } else {
+      setNextImage(nextImage + 1);
+    }
+  }
+
+  // scroll images back
+  function previousImageOnClick() {
+    if(nextImage === 0) {
+      setNextImage(3);
+    } else {
+      setNextImage(nextImage - 1);
+    }
+  }
   
+  // set clicked image to be the main image
   useEffect(() => {
     const smallImage = document.querySelectorAll('.smallImage');
     function imageClick(e) {
@@ -97,29 +127,28 @@ export default function Carousel() {
 
   return (
     <ImageDivStyles>
-      {productImages.map(img => (
-        <div onClick={onClick} key={img}>
-          <img src={imageActive} key={img.imageOne} alt="coolShoes" className="bigImage"/>
-        </div>
-      ))}
-      {productImages.map(img => (
-        <div key={img} className="smallImageDiv">
-          <img src={img.imageOne} key={img.imageOne} alt="coolShoes" className="smallImage"/>
-          <img src={img.imageTwo} key={img.imageTwo} alt="coolShoes" className="smallImage"/>
-          <img src={img.imageThree} key={img.imageThree} alt="coolShoes" className="smallImage"/>
-          <img src={img.imageFour} key={img.imageFour} alt="coolShoes" className="smallImage"/>
-        </div>
-      ))}
+      <div onClick={onClick}>
+        <img src={imageActive} alt="coolShoes" className="bigImage"/>
+      </div>
+      <div className="smallImageDiv">
+        {productImages.map(img => (
+          <img src={img.image} key={img.id} id={`${img.id}`} alt="coolShoes" className="smallImage"/>
+        ))}
+      </div>
       <OverlayStyles>
         <div className={`overlayDiv ${isOverlay ? 'overlay' : ''}`}>
-          {productImages.map(img => (
-            <div key={img} className="bigImageOver">
-              <button onClick={onClick} className="closeMenu">
+          <div key={closeMenu.id} className="bigImageOver">
+            <button onClick={onClick} className="closeMenu">
                 <img src={closeMenu} alt="closeMenu"/>
-              </button>
-              <img src={imageActive} key={img.imageOne} alt="coolShoes" className="overlayBigImage"/>
-            </div>
-          ))}
+            </button>
+            <button className="previousButton" onClick={previousImageOnClick}>
+              <img src={previousButton} alt="nextButton"/>
+            </button>
+            <button className="nextButton" onClick={nextImageOnClick}>
+              <img src={nextButton} alt="previousButton"/>
+            </button>
+            <img src={productImages[nextImage].image} alt="coolShoes" className="overlayBigImage"/>
+          </div>
         </div>
       </OverlayStyles>
     </ImageDivStyles>
