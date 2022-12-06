@@ -122,8 +122,7 @@ export default function Carousel() {
   // set overlay image
   const [isOverlay, setOverlay] = useState(false);
   const onClick = () => setOverlay(!isOverlay);
-  console.log(imageId)
- 
+
   // try to set the image id into the imageActive instead of the path name and match that id with the object in data.js to map the correct image
   // set clicked image to be the main image
   useEffect(() => {
@@ -134,7 +133,6 @@ export default function Carousel() {
         setImageId(e.target.id);
       }
     }
-
     smallImage.forEach(img => img.addEventListener('click', imageClick));
     return () => smallImage.forEach(img => img.removeEventListener('click', imageClick));
   }, []);
@@ -157,7 +155,6 @@ export default function Carousel() {
     }
   }
   
-
   return (
     <ImageDivStyles>
       <div onClick={onClick}>
