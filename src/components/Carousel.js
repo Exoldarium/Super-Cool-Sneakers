@@ -17,6 +17,10 @@ const ImageDivStyles = styled.div`
     height: 500px;
     border-radius: 10px;
     cursor: pointer;
+    display: inline-block;
+  }
+  .bigImagemobile {
+    display: none;
   }
   .smallImage {
     width: auto;
@@ -25,15 +29,38 @@ const ImageDivStyles = styled.div`
     border-radius: 10px;
     cursor: pointer;
   }
+  .previousButtonMobile, .nextButtonMobile {
+    display: none;
+  }
   @media only screen and (max-width: 790px) {
+    .previousButtonMobile {
+      position: absolute;
+      margin-top: 12em;
+      margin-left: -2.5em;
+      display: inline-block;
+      cursor: pointer;
+      z-index: 0;
+    }
+    .nextButtonMobile {
+      position: absolute;
+      margin-top: 12em;
+      margin-left: 23em;
+      display: inline-block;
+      cursor: pointer;
+      z-index: 0;
+    }
     .smallImageDiv{
       display: none;
     }
-    .bigImage {
+    .bigImage { 
+      display: none;
+    }
+    .bigImagemobile {
       width: auto;
       height: 300px;
       border-radius: 10px;
       cursor: pointer;
+      display: inline-block;
     }
     .smallImage {
       width: auto;
@@ -74,11 +101,13 @@ const OverlayStyles = styled.div`
     position: absolute;
     margin-top: 20em;
     margin-left: 45em;
+    cursor: pointer;
   }
   .previousButton {
     position: absolute;
     margin-top: 20em;
     margin-left: -2em;
+    cursor: pointer;
   }
   @media only screen and (max-width: 790px) {
     display: none;
@@ -89,35 +118,20 @@ export default function Carousel() {
   // set active image
   const [imageActive, setImageActive] = useState(productImages[0].image);
   // set overlay image id
-  const [nextImage, setNextImage] = useState(0);
+  const [imageId, setImageId] = useState(0);
   // set overlay image
   const [isOverlay, setOverlay] = useState(false);
   const onClick = () => setOverlay(!isOverlay);
+  console.log(imageId)
  
-  // scroll images forward
-  function nextImageOnClick() {
-    if(nextImage === 3) {
-      setNextImage(0);
-    } else {
-      setNextImage(nextImage + 1);
-    }
-  }
-
-  // scroll images back
-  function previousImageOnClick() {
-    if(nextImage === 0) {
-      setNextImage(3);
-    } else {
-      setNextImage(nextImage - 1);
-    }
-  }
-  
+  // try to set the image id into the imageActive instead of the path name and match that id with the object in data.js to map the correct image
   // set clicked image to be the main image
   useEffect(() => {
     const smallImage = document.querySelectorAll('.smallImage');
     function imageClick(e) {
       if(e.target) {
         setImageActive(e.target.src);
+        setImageId(e.target.id);
       }
     }
 
@@ -125,10 +139,38 @@ export default function Carousel() {
     return () => smallImage.forEach(img => img.removeEventListener('click', imageClick));
   }, []);
 
+  // scroll images forward
+  function nextImageOnClick() {
+    if(imageId === 3) {
+      setImageId(0);
+    } else {
+      setImageId(parseFloat(imageId) + 1);
+    }
+  }
+
+  // scroll images back
+  function previousImageOnClick() {
+    if(imageId === 0) {
+      setImageId(3);
+    } else {
+      setImageId(parseFloat(imageId) - 1);
+    }
+  }
+  
+
   return (
     <ImageDivStyles>
       <div onClick={onClick}>
-        <img src={imageActive} alt="coolShoes" className="bigImage"/>
+        {/* under 790px witdth */}
+        <button className="previousButtonMobile" onClick={previousImageOnClick}>
+          <img src={previousButton} alt="nextButton"/>
+        </button>
+        <button className="nextButtonMobile" onClick={nextImageOnClick}>
+          <img src={nextButton} alt="previousButton"/>
+        </button>
+        <img src={productImages[imageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
+        {/* over 790px witdth */}
+        <img src={imageActive} id={imageId} alt="coolShoes" className="bigImage"/>
       </div>
       <div className="smallImageDiv">
         {productImages.map(img => (
@@ -136,6 +178,7 @@ export default function Carousel() {
         ))}
       </div>
       <OverlayStyles>
+        {/* only over 790px witdth */}
         <div className={`overlayDiv ${isOverlay ? 'overlay' : ''}`}>
           <div key={closeMenu.id} className="bigImageOver">
             <button onClick={onClick} className="closeMenu">
@@ -147,7 +190,7 @@ export default function Carousel() {
             <button className="nextButton" onClick={nextImageOnClick}>
               <img src={nextButton} alt="previousButton"/>
             </button>
-            <img src={productImages[nextImage].image} alt="coolShoes" className="overlayBigImage"/>
+            <img src={productImages[imageId].image} alt="coolShoes" className="overlayBigImage"/>
           </div>
         </div>
       </OverlayStyles>

@@ -25,11 +25,12 @@ const HamburgerStyles = styled.div`
     }
     .hamburger-menu.active {
       opacity: 1;
-      top: 2.3em;
+      top: 2em;
       visibility: visible;
       position: absolute;
       display: flex;
       justify-content: flex-start;
+      z-index: 1;
     }
     img {
       width: auto;

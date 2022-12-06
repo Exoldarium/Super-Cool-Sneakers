@@ -73,6 +73,7 @@ const CartStyles = styled.div`
       opacity: 1;
       margin-right: 0;
       visibility: visible;
+      z-index: 1;
     }
     ul {
       height: 100vh;
