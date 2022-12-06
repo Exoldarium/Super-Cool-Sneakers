@@ -122,8 +122,8 @@ export default function Carousel() {
   // set overlay image
   const [isOverlay, setOverlay] = useState(false);
   const onClick = () => setOverlay(!isOverlay);
+  const parsedImageId = parseFloat(imageId);
 
-  // try to set the image id into the imageActive instead of the path name and match that id with the object in data.js to map the correct image
   // set clicked image to be the main image
   useEffect(() => {
     const smallImage = document.querySelectorAll('.smallImage');
@@ -139,19 +139,19 @@ export default function Carousel() {
 
   // scroll images forward
   function nextImageOnClick() {
-    if(imageId === 3) {
+    if(parsedImageId === 3) {
       setImageId(0);
     } else {
-      setImageId(parseFloat(imageId) + 1);
+      setImageId(parsedImageId + 1);
     }
   }
 
   // scroll images back
   function previousImageOnClick() {
-    if(imageId === 0) {
+    if(parsedImageId === 0) {
       setImageId(3);
     } else {
-      setImageId(parseFloat(imageId) - 1);
+      setImageId(parsedImageId - 1);
     }
   }
   
@@ -165,9 +165,9 @@ export default function Carousel() {
         <button className="nextButtonMobile" onClick={nextImageOnClick}>
           <img src={nextButton} alt="previousButton"/>
         </button>
-        <img src={productImages[imageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
+        <img src={productImages[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
         {/* over 790px witdth */}
-        <img src={imageActive} id={imageId} alt="coolShoes" className="bigImage"/>
+        <img src={imageActive} id={parsedImageId} alt="coolShoes" className="bigImage"/>
       </div>
       <div className="smallImageDiv">
         {productImages.map(img => (
@@ -187,7 +187,7 @@ export default function Carousel() {
             <button className="nextButton" onClick={nextImageOnClick}>
               <img src={nextButton} alt="previousButton"/>
             </button>
-            <img src={productImages[imageId].image} alt="coolShoes" className="overlayBigImage"/>
+            <img src={productImages[parsedImageId].image} alt="coolShoes" className="overlayBigImage"/>
           </div>
         </div>
       </OverlayStyles>

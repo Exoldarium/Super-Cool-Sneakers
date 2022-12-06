@@ -131,7 +131,7 @@ export default function AddToCartInfo() {
           <p key={info.name} className="name">{info.name} </p>
           <p key={info.description} className="description">{info.description}</p>
           <p key={info.price} className="price">{info.price}</p>
-          <p key={info.discountPrice} className="discount">{info.discountPrice}</p>
+          <p key={info.currentPrice} className="discount">{info.currentPrice}</p>
         </div>
       ))}
       <InputStyles>

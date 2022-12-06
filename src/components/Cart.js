@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useDetectOutsideClick } from "../useDetectOutsideClick";
 import styled from "styled-components";
+import { productCartInfo } from "../data";
 import CartImage from '../images/icon-cart.svg';
 
 const CartStyles = styled.div`

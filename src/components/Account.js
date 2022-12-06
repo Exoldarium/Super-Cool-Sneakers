@@ -107,20 +107,20 @@ export default function Account() {
           <img src={AvatarImage} alt="cart" className="avatar"/>
         </button>
         <nav className={`avatar-menu ${isActive ? 'active' : 'inactive'}`}>
-        <ul>
-          <a href='#'>
-            <li>My Account</li>
-          </a>
-          <a href='#'>
-            <li>Settings</li>
-          </a>
-          <a href='#'>
-            <li>Help</li>
-          </a>
-          <a href='#'>
-            <li>Sign Out</li>
-          </a>
-        </ul>
+          <ul>
+            <a href='#'>
+              <li>My Account</li>
+            </a>
+            <a href='#'>
+              <li>Settings</li>
+            </a>
+            <a href='#'>
+              <li>Help</li>
+            </a>
+            <a href='#'>
+              <li>Sign Out</li>
+            </a>
+          </ul>
         </nav>
       </div>
     </Avatarstyles>
