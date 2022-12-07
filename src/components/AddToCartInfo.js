@@ -1,6 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
-import { useState } from 'react';
-import { productInfo } from "../data";
+import { useState, useEffect } from 'react';
+import { productInfo, productCartInfo } from "../data";
+import iconMinus from "../images/icon-minus.svg";
+import iconPlus from '../images/icon-plus.svg';
 
 const InfoDivStyles = styled.div`
   .itemsDiv {
@@ -80,7 +83,7 @@ const InputStyles = styled.div`
   width: fit-content;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   max-height: 40px;
-  .inputButton {
+  button {
     background: var(--greyishBlue);
     border: none;
     width: 50px;
@@ -88,20 +91,27 @@ const InputStyles = styled.div`
     font-size: 30px;
     border-radius: 2px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  label {
+  .spanLabel {
     background: var(--greyishBlue);
     border: none;
     width: 50px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   .cartInput {
+    display: none;
+  }
+  label {
     background: var(--orange);
     color: var(--lightGreyishBlue);
     border: none;
     border-radius: 2px;
     font-size: 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 2px;
     cursor: pointer;
   }
   .inputDiv {
@@ -117,11 +127,31 @@ const InputStyles = styled.div`
   }
 `;
 
-export default function AddToCartInfo() {
-  const [inputStateM, setStateInputM] = useState('+');
-  const [inputStateS, setStateInputS] = useState('-');
-  const [cartInput, setCartInput] = useState('Add to Cart');
-  // put images to inputs with css
+export default function AddToCartInfo({ isProduct, onChangeSetProduct }) {
+  const [isAmount, setAmount] = useState(1);
+  // const [isProduct, setProduct] = useState(productCartInfo);
+  const cartArray = [];
+  const buttonMinus = document.querySelector('.buttonMinus');
+  const buttonPlus = document.querySelector('.buttonPlus');
+  console.log(isProduct);
+
+  const handleChangeOnClick = () => {
+    onChangeSetProduct(productCartInfo);
+  }
+    
+  function increaseAmountOnClick() {
+    setAmount((previousAmount) => (previousAmount += 1));
+  }
+
+  function decreaseAmountOnClick() {
+    setAmount((previousAmount) => {
+      if (previousAmount > 1 ) {
+        return (previousAmount -= 1);
+      } else {
+        return (previousAmount = 1);
+      }
+    })
+  }
 
   return (
     <InfoDivStyles>
@@ -136,10 +166,15 @@ export default function AddToCartInfo() {
       ))}
       <InputStyles>
         <div className="inputDiv">
-          <input type="button" id="button" value={inputStateM} className="inputButton"></input>
-          <label htmlFor ="button">1</label>
-          <input type="button" id="button" value={inputStateS} className="inputButton"></input>
-          <input type="submit" id="submit" value={cartInput} className="cartInput"></input>
+          <button className="buttonMinus" onClick={decreaseAmountOnClick}>
+            <img src={iconMinus} alt="iconMinus" />
+          </button>
+          <span className="spanLabel">{isAmount}</span>
+          <button className="buttonPlus" onClick={increaseAmountOnClick}>
+            <img src={iconPlus} alt="iconPlus"/>
+          </button>
+          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleChangeOnClick}></input>
+          <label htmlFor="submit">Add to Cart</label>
         </div>
       </InputStyles>
     </InfoDivStyles> 

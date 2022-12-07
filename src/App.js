@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Menu from './components/Menu';
 import Product from './components/Product';
+import { productCartInfo } from './data';
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -52,12 +54,20 @@ const GlobalStyles = createGlobalStyle`
 
 `;
 
-function App() {
+function App(props) {
+  const [isProduct, setProduct] = useState('');
+  const onChangeSetProduct = (setNewProduct) => {
+    setProduct(setNewProduct);
+  }
+  console.log(props.products);
   return (
     <>
       <GlobalStyles />
         <Menu />
-        <Product />
+        <Product 
+          setProduct={isProduct}
+          onChangeSetProduct={onChangeSetProduct}
+        />
     </>
   );
 }
