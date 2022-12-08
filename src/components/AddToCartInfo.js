@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
-import { productInfo, productCartInfo } from "../data";
 import iconMinus from "../images/icon-minus.svg";
 import iconPlus from '../images/icon-plus.svg';
 
@@ -127,18 +126,19 @@ const InputStyles = styled.div`
   }
 `;
 
-export default function AddToCartInfo({ isProduct, onChangeSetProduct }) {
+export default function AddToCartInfo({ product }, props) {
+  const { company, name, description, price, currentPrice, images } = product;
   const [isAmount, setAmount] = useState(1);
   // const [isProduct, setProduct] = useState(productCartInfo);
-  const cartArray = [];
-  const buttonMinus = document.querySelector('.buttonMinus');
-  const buttonPlus = document.querySelector('.buttonPlus');
-  console.log(isProduct);
+  // const cartArray = [];
+  // const buttonMinus = document.querySelector('.buttonMinus');
+  // const buttonPlus = document.querySelector('.buttonPlus');
+  // console.log(isProduct);
 
-  const handleChangeOnClick = () => {
-    onChangeSetProduct(productCartInfo);
-  }
-    
+  // const handleChangeOnClick = () => {
+  //   onChangeSetProduct(productCartInfo);
+  // }
+
   function increaseAmountOnClick() {
     setAmount((previousAmount) => (previousAmount += 1));
   }
@@ -155,15 +155,13 @@ export default function AddToCartInfo({ isProduct, onChangeSetProduct }) {
 
   return (
     <InfoDivStyles>
-      {productInfo.map(info => (
-        <div key={info} className="itemsDiv">
-          <p key={info.company} className="company">{info.company}</p>
-          <p key={info.name} className="name">{info.name} </p>
-          <p key={info.description} className="description">{info.description}</p>
-          <p key={info.price} className="price">{info.price}</p>
-          <p key={info.currentPrice} className="discount">{info.currentPrice}</p>
+        <div className="itemsDiv">
+          <p className="company">{company}</p>
+          <p className="name">{name} </p>
+          <p className="description">{description}</p>
+          <p className="price">{price}</p>
+          <p className="discount">{currentPrice}</p>
         </div>
-      ))}
       <InputStyles>
         <div className="inputDiv">
           <button className="buttonMinus" onClick={decreaseAmountOnClick}>
@@ -173,7 +171,7 @@ export default function AddToCartInfo({ isProduct, onChangeSetProduct }) {
           <button className="buttonPlus" onClick={increaseAmountOnClick}>
             <img src={iconPlus} alt="iconPlus"/>
           </button>
-          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleChangeOnClick}></input>
+          <input type="submit" id="submit" className="cartInput" value={isAmount}></input>
           <label htmlFor="submit">Add to Cart</label>
         </div>
       </InputStyles>

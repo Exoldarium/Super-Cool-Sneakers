@@ -62,9 +62,9 @@ export default function HamburgerMenu() {
     <HamburgerStyles>
       {/* only shows under 790px screen size */}
       <div ref={dropdownRef}>
-      <button onClick={onClick}>
-        <img src={Hamburger} alt="menuicon"/>
-      </button>
+        <button onClick={onClick}>
+          <img src={Hamburger} alt="menuicon"/>
+        </button>
         <nav className={`hamburger-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
             <li>        
