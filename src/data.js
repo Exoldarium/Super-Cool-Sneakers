@@ -1,4 +1,4 @@
-export const productInfo = 
+export const productInfo = [
   {
     id: 0,
     company: 'THE BEST SHOE COMPANY',
@@ -24,4 +24,4 @@ export const productInfo =
         image: 'image-product-4.jpg',
       }
     ]
-  };
+}];

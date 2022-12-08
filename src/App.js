@@ -146,11 +146,40 @@ const InnerDivStyles = styled.div`
   }
 `;
 
-function App() {
-  const data = productInfo;
+function App(props) {
+  // const data = productInfo;
   // onSubmit (or onClick) in AddToCartInfor.js will add our product amount, we put this value into a state and process it here in App.js
   // the state with amount will be passed to the Cart component where it will be displayed, we can use onChange for that
   // try to use the moz-todo way of passing props
+  const [product, setProduct] = useState(props.product)
+
+  const carousel = product.map(product => (
+    <Carousel 
+      id={product.id}
+      company={product.company}
+      name={product.name}
+      description={product.description}
+      price={product.price}
+      currentPrice={product.currentPrice}
+      images={product.images}
+      key={product.id}
+    />
+  ))
+
+  const addToCartInfo = product.map(product => (
+    <AddToCartInfo 
+      id={product.id}
+      company={product.company}
+      name={product.name}
+      description={product.description}
+      price={product.price}
+      currentPrice={product.currentPrice}
+      images={product.images}
+      key={product.id}
+    />
+  ))
+
+
 
   return (
     <>
@@ -182,15 +211,13 @@ function App() {
             </a>
           </InnerDivStyles>
           <OuterDivStyles>
-            <Cart 
-              product={data}
-            />
+            <Cart />
             <Account />
           </OuterDivStyles>
         </NavbarStyles>
         <ProductStyles>
-          <Carousel product={data}/>
-          <AddToCartInfo product={data}/>
+          {carousel}
+          {addToCartInfo}
         </ProductStyles>
     </>
   );

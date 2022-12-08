@@ -126,8 +126,8 @@ const InputStyles = styled.div`
   }
 `;
 
-export default function AddToCartInfo({ product }, props) {
-  const { company, name, description, price, currentPrice, images } = product;
+export default function AddToCartInfo(props) {
+  // const { company, name, description, price, currentPrice, images } = product;
   const [isAmount, setAmount] = useState(1);
   // const [isProduct, setProduct] = useState(productCartInfo);
   // const cartArray = [];
@@ -156,11 +156,11 @@ export default function AddToCartInfo({ product }, props) {
   return (
     <InfoDivStyles>
         <div className="itemsDiv">
-          <p className="company">{company}</p>
-          <p className="name">{name} </p>
-          <p className="description">{description}</p>
-          <p className="price">{price}</p>
-          <p className="discount">{currentPrice}</p>
+          <p className="company">{props.company}</p>
+          <p className="name">{props.name} </p>
+          <p className="description">{props.description}</p>
+          <p className="price">{props.price}</p>
+          <p className="discount">{props.currentPrice}</p>
         </div>
       <InputStyles>
         <div className="inputDiv">

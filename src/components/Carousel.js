@@ -113,10 +113,9 @@ const OverlayStyles = styled.div`
   }
 `;
 
-export default function Carousel({ product }) {
-  const { company, name, description, price, currentPrice, images } = product;
+export default function Carousel(props) {
   // set active image
-  const [imageActive, setImageActive] = useState(images[0].image);
+  const [imageActive, setImageActive] = useState(props.images[0].image);
   // set overlay image id
   const [imageId, setImageId] = useState(0);
   // set overlay image
@@ -165,12 +164,12 @@ export default function Carousel({ product }) {
         <button className="nextButtonMobile" onClick={nextImageOnClick}>
           <img src={nextButton} alt="previousButton"/>
         </button>
-        <img src={images[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
+        <img src={props.images[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
         {/* over 790px witdth */}
         <img src={imageActive} id={parsedImageId} alt="coolShoes" className="bigImage"/>
       </div>
       <div className="smallImageDiv">
-        {images.map(img => (
+        {props.images.map(img => (
           <img src={img.image} key={img.id} id={img.id} alt="coolShoes" className="smallImage"/>
         ))}
       </div>
@@ -179,7 +178,7 @@ export default function Carousel({ product }) {
         <div className={`overlayDiv ${isOverlay ? 'overlay' : ''}`}>
           <div key={closeMenu.id} className="bigImageOver">
             <button onClick={onClick} className="closeMenu">
-                <img src={closeMenu} alt="closeMenu"/>
+              <img src={closeMenu} alt="closeMenu"/>
             </button>
             <button className="previousButton" onClick={previousImageOnClick}>
               <img src={previousButton} alt="nextButton"/>
@@ -187,7 +186,7 @@ export default function Carousel({ product }) {
             <button className="nextButton" onClick={nextImageOnClick}>
               <img src={nextButton} alt="previousButton"/>
             </button>
-            <img src={images[parsedImageId].image} alt="coolShoes" className="overlayBigImage"/>
+            <img src={props.images[parsedImageId].image} alt="coolShoes" className="overlayBigImage"/>
           </div>
         </div>
       </OverlayStyles>
