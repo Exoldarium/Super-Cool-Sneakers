@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import Hamburger from '../images/icon-menu.svg';
+import hamburger from '../images/icon-menu.svg';
 import { useDetectOutsideClick } from "../useDetectOutsideClick";
 
 const HamburgerStyles = styled.div`
@@ -54,16 +54,16 @@ const HamburgerStyles = styled.div`
 `;
 
 export default function HamburgerMenu() {
-  const dropdownRef = useRef(null); // initial ref is null but we pass our ref to our div element below, so dropdownRef.current will be our div
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false); // we add our hook
-  const onClick = () => setIsActive(!isActive); // on button click change the state
+  const dropdownRef = useRef(null); 
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false); 
+  const onClick = () => setIsActive(!isActive);
 
   return (
     <HamburgerStyles>
       {/* only shows under 790px screen size */}
       <div ref={dropdownRef}>
         <button onClick={onClick}>
-          <img src={Hamburger} alt="menuicon"/>
+          <img src={hamburger} alt="menuicon"/>
         </button>
         <nav className={`hamburger-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>

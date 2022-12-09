@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useDetectOutsideClick } from "../useDetectOutsideClick";
 import styled from "styled-components";
-import CartImage from '../images/icon-cart.svg';
+import cartImage from '../images/icon-cart.svg';
+import deleteIcon from '../images/icon-delete.svg'
 
 const CartStyles = styled.div`
   margin: 0;
@@ -51,6 +52,10 @@ const CartStyles = styled.div`
     padding: 0;
     margin: 0;
   }
+  .cartProductImage {
+    width: auto;
+    height: 50px;
+  }
   @media only screen and (max-width: 790px) {
     .cart-menu {
       position: absolute;
@@ -86,20 +91,31 @@ const CartStyles = styled.div`
   }
 `;
 
-export default function Cart() {
-  const dropdownRef = useRef(null); // initial ref is null but we pass our ref to our div element below, so dropdownRef.current will be our div
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false); // we add our hook
-  const onClick = () => setIsActive(!isActive); // on button click change the state
+export default function Cart(props) {
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
 
   return (
     <CartStyles>
       <div ref={dropdownRef}>
         <button onClick={onClick}>
-          <img src={CartImage} alt="cart" className="cart"/>
+          <img src={cartImage} alt="cart" className="cart"/>
         </button>
         <nav className={`cart-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
-            <li>Item</li>
+            <span>Cart</span>
+            <li>
+              <span>
+                <img src={props.images[0].image} alt="shoesImage" className="cartProductImage"/>
+              </span>
+              <p>{props.name}</p>
+              <p>{props.currentPrice}x{props.amount}</p>
+              <button className="deleteItem">
+                <img src={deleteIcon} alt="deleteIcon"/>
+              </button>
+              <button className="checkout">Checkout</button>
+            </li>
           </ul>
         </nav>
       </div>

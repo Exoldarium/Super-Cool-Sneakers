@@ -27,14 +27,14 @@ const InfoDivStyles = styled.div`
     line-height: 30px;
   }
   .price {
-    font-size: 30px;
-    font-weight: bolder;
-    margin: 0;
-  }
-  .discount {
     font-size: 25px;
+    margin: 0;
     text-decoration: line-through;
     color: var(--darkGreyishBlue);
+  }
+  .discount {
+    font-size: 30px;
+    font-weight: bolder;
     margin: 0;
   }
   @media only screen and (max-width: 790px) {
@@ -63,13 +63,13 @@ const InfoDivStyles = styled.div`
     }
     .price {
       font-size: 25px;
-      font-weight: bolder;
+      color: var(--darkGreyishBlue);
       margin: 0;
+      text-decoration: line-through;
     }
     .discount {
-      font-size: 25px;
-      text-decoration: line-through;
-      color: var(--darkGreyishBlue);
+      font-size: 30px;
+      font-weight: bolder;
       margin: 0;
     }
   }
@@ -127,25 +127,23 @@ const InputStyles = styled.div`
 `;
 
 export default function AddToCartInfo(props) {
-  // const { company, name, description, price, currentPrice, images } = product;
   const [isAmount, setAmount] = useState(1);
-  // const [isProduct, setProduct] = useState(productCartInfo);
-  // const cartArray = [];
-  // const buttonMinus = document.querySelector('.buttonMinus');
-  // const buttonPlus = document.querySelector('.buttonPlus');
-  // console.log(isProduct);
 
-  // const handleChangeOnClick = () => {
-  //   onChangeSetProduct(productCartInfo);
-  // }
+  // on click set new amount to be sent to parent component
+  function handleClick() {
+    props.onClick(isAmount);
+    setAmount(1);
+  }
 
+  // on button click increase amount
   function increaseAmountOnClick() {
     setAmount((previousAmount) => (previousAmount += 1));
   }
 
+  // on button click decrease amount
   function decreaseAmountOnClick() {
     setAmount((previousAmount) => {
-      if (previousAmount > 1 ) {
+      if (previousAmount > 1) {
         return (previousAmount -= 1);
       } else {
         return (previousAmount = 1);
@@ -157,7 +155,7 @@ export default function AddToCartInfo(props) {
     <InfoDivStyles>
         <div className="itemsDiv">
           <p className="company">{props.company}</p>
-          <p className="name">{props.name} </p>
+          <p className="name">{props.name}</p>
           <p className="description">{props.description}</p>
           <p className="price">{props.price}</p>
           <p className="discount">{props.currentPrice}</p>
@@ -171,7 +169,7 @@ export default function AddToCartInfo(props) {
           <button className="buttonPlus" onClick={increaseAmountOnClick}>
             <img src={iconPlus} alt="iconPlus"/>
           </button>
-          <input type="submit" id="submit" className="cartInput" value={isAmount}></input>
+          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleClick}></input>
           <label htmlFor="submit">Add to Cart</label>
         </div>
       </InputStyles>

@@ -96,9 +96,9 @@ const Avatarstyles = styled.div`
 `;
 
 export default function Account() {
-  const dropdownRef = useRef(null); // initial ref is null but we pass our ref to our div element below, so dropdownRef.current will be our div
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false); // we add our hook
-  const onClick = () => setIsActive(!isActive); // on button click change the state
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
 
   return (
     <Avatarstyles>

@@ -5,8 +5,7 @@ import AddToCartInfo from './components/AddToCartInfo';
 import Carousel from './components/Carousel';
 import Cart from './components/Cart';
 import HamburgerMenu from './components/HamburgerMenu';
-import Logo from './images/logo.svg';
-import { productInfo } from './data';
+import logo from './images/logo.svg';
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -147,13 +146,30 @@ const InnerDivStyles = styled.div`
 `;
 
 function App(props) {
-  // const data = productInfo;
-  // onSubmit (or onClick) in AddToCartInfor.js will add our product amount, we put this value into a state and process it here in App.js
-  // the state with amount will be passed to the Cart component where it will be displayed, we can use onChange for that
-  // try to use the moz-todo way of passing props
-  const [product, setProduct] = useState(props.product)
+  const [setProduct, isProduct] = useState(props.product);
 
-  const carousel = product.map(product => (
+  // add new amount to state
+  function addAmount(amount){
+    const newProduct = JSON.parse(JSON.stringify(setProduct));
+    newProduct[0].amount = amount;
+    isProduct(newProduct);
+  }
+  
+  const cart = setProduct.map(product => (
+    <Cart 
+      id={product.id}
+      company={product.company}
+      name={product.name}
+      description={product.description}
+      price={product.price}
+      currentPrice={product.currentPrice}
+      amount={product.amount}
+      images={product.images}
+      key={product.id}
+    />
+  ));
+
+  const carousel = setProduct.map(product => (
     <Carousel 
       id={product.id}
       company={product.company}
@@ -161,12 +177,13 @@ function App(props) {
       description={product.description}
       price={product.price}
       currentPrice={product.currentPrice}
+      amount={product.amount}
       images={product.images}
       key={product.id}
     />
-  ))
+  ));
 
-  const addToCartInfo = product.map(product => (
+  const addToCartInfo = setProduct.map(product => (
     <AddToCartInfo 
       id={product.id}
       company={product.company}
@@ -174,12 +191,12 @@ function App(props) {
       description={product.description}
       price={product.price}
       currentPrice={product.currentPrice}
+      amount={product.amount}
       images={product.images}
       key={product.id}
+      onClick={addAmount}
     />
-  ))
-
-
+  ));
 
   return (
     <>
@@ -189,7 +206,7 @@ function App(props) {
           <OuterDivStyles>
             <a href="#" className="header-link">
               <h1 className="logoHeader">
-                <img src={Logo} alt="logo" className="logo"/>
+                <img src={logo} alt="logo" className="logo"/>
               </h1>
             </a>
           </OuterDivStyles>
@@ -211,7 +228,7 @@ function App(props) {
             </a>
           </InnerDivStyles>
           <OuterDivStyles>
-            <Cart />
+            {cart}
             <Account />
           </OuterDivStyles>
         </NavbarStyles>
