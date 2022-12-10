@@ -156,10 +156,6 @@ function App(props) {
     newProduct[0].totalPrice = totalPrice;
     isProduct(newProduct);
   }
-
-  function deleteItem(e) {
-    console.log(e.target);
-  }
   
   const cart = setProduct.map(product => (
     <Cart 
@@ -173,7 +169,6 @@ function App(props) {
       totalPrice={product.totalPrice}
       images={product.images}
       key={product.id}
-      onClick={deleteItem}
     />
   ));
 

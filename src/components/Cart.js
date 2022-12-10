@@ -177,11 +177,6 @@ export default function Cart(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
-  console.log(props);
-
-  function deleteItem() {
-    props.onClick();
-  }
 
   return (
     <CartStyles>
@@ -207,7 +202,7 @@ export default function Cart(props) {
               </span>  
             </li>
             <span className="buttonSpan">
-              <button className="checkout" onClick={deleteItem}>Checkout</button>
+              <button className="checkout">Checkout</button>
             </span>
           </ul>
         </nav>
