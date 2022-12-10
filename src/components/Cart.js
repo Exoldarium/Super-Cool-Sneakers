@@ -3,6 +3,7 @@ import { useDetectOutsideClick } from "../useDetectOutsideClick";
 import styled from "styled-components";
 import cartImage from '../images/icon-cart.svg';
 import deleteIcon from '../images/icon-delete.svg'
+import { useState } from "react";
 
 const CartStyles = styled.div`
   margin: 0;
@@ -32,7 +33,7 @@ const CartStyles = styled.div`
     height: 100px;
     top: 2.5em;
     right: 0.1em;
-    background: var(--greyishBlue);
+    background: var(--lightGreyishBlue);
     border-radius: 4px;
     box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
     justify-content: center;
@@ -44,49 +45,130 @@ const CartStyles = styled.div`
   .cart-menu.active {
     opacity: 1;
     visibility: visible;
+    width: 15em;
+    height: fit-content;
   }
   ul {
     list-style: none;
-    display: flex;
-    flex-direction: column;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+  }
+  li {
+    border-top: 1px solid black;
+    cursor: default;
   }
   .cartProductImage {
     width: auto;
     height: 50px;
+    border-radius: 5px;
+  }
+  .imgSpan {
+    display: inline-block;
+    flex-direction: row;
+    margin: 5px;
+  }
+  .paragraphInfo {
+    margin: 0;
+  }
+  .paragraphSpan {
+    display: inline-block;
+    margin: 5px;
+    text-align: left;
+    line-height: 33px;
+  }
+  .deleteItem {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+  }
+  .checkout {
+    width: 20em;
+    height: 3em;
+    background: var(--orange);
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: var(--lightGreyishBlue);
+    text-align: center;
+    font-weight: bold;
+  }
+  .totalPriceSpan {
+    font-weight: bold;
+    margin-left: 5px;
+    margin: 5px;
   }
   @media only screen and (max-width: 790px) {
     .cart-menu {
       position: absolute;
-      width: 25vh;
-      height: 100vh;
-      background: var(--greyishBlue);
+      top: 2.5em;
+      right: 0.1em;
+      background: var(--lightGreyishBlue);
       border-radius: 4px;
-      border: 1px solid var(--lightboxBlack);
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-      display: flex;
+      justify-content: center;
       opacity: 0;
       visibility: hidden;
-      right: -2.6em;
-      margin: 0;
-      top: 2.1em;
-      align-items: center;
-      justify-content: flex-start;
+      border: 1px solid var(--lightboxBlack);
+      width: 8em;
     }
     .cart-menu.active {
       opacity: 1;
-      margin-right: 0;
       visibility: visible;
-      z-index: 1;
+      height: fit-content;
     }
     ul {
-      height: 100vh;
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      padding-right: 0.3em;
-      justify-content: flex-start;
+      cursor: default;
+    }
+    li {
+      border-top: 1px solid black;
+      cursor: default;
+    }
+    .cartProductImage {
+      width: auto;
+      height: 50px;
+      border-radius: 5px;
+    }
+    .imgSpan {
+      display: inline-block;
+      flex-direction: row;
+      margin: 5px;
+    }
+    .paragraphInfo {
+      margin: 0;
+    }
+    .paragraphSpan {
+      display: inline-block;
+      margin: 5px;
+      text-align: left;
+      line-height: 33px;
+    }
+    .deleteItem {
+      display: inline-block;
+      padding: 10px;
+      margin: 5px;
+    }
+    .checkout {
+      width: 20em;
+      height: 3em;
+      background: var(--orange);
+      margin: 5px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: var(--lightGreyishBlue);
+      font-weight: bold;
+    }
+    .totalPriceSpan {
+      font-weight: bold;
+      margin-left: 5px;
     }
   }
 `;
@@ -95,6 +177,11 @@ export default function Cart(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
+  console.log(props);
+
+  function deleteItem() {
+    props.onClick();
+  }
 
   return (
     <CartStyles>
@@ -104,18 +191,24 @@ export default function Cart(props) {
         </button>
         <nav className={`cart-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
-            <span>Cart</span>
+            <span className="cartTitle">Cart</span>
             <li>
-              <span>
+              <span className="imgSpan">
                 <img src={props.images[0].image} alt="shoesImage" className="cartProductImage"/>
               </span>
-              <p>{props.name}</p>
-              <p>{props.currentPrice}x{props.amount}</p>
-              <button className="deleteItem">
-                <img src={deleteIcon} alt="deleteIcon"/>
-              </button>
-              <button className="checkout">Checkout</button>
+              <span className="paragraphSpan">
+                <p className="paragraphInfo">{props.name}</p>
+                <p className="paragraphInfo">{`$${props.currentPrice}`}x{props.amount}<span className="totalPriceSpan">{`$${props.totalPrice}`}</span></p>
+              </span>
+              <span className="deleteButtonSpan">
+                <button>
+                  <img src={deleteIcon} alt="deleteIcon" className="deleteItem"/>
+                </button>
+              </span>  
             </li>
+            <span className="buttonSpan">
+              <button className="checkout" onClick={deleteItem}>Checkout</button>
+            </span>
           </ul>
         </nav>
       </div>

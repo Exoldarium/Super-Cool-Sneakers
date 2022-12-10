@@ -127,12 +127,12 @@ const InputStyles = styled.div`
 `;
 
 export default function AddToCartInfo(props) {
-  const [isAmount, setAmount] = useState(1);
+  const [isAmount, setAmount] = useState(0);
 
   // on click set new amount to be sent to parent component
   function handleClick() {
     props.onClick(isAmount);
-    setAmount(1);
+    setAmount(0);
   }
 
   // on button click increase amount
@@ -146,7 +146,7 @@ export default function AddToCartInfo(props) {
       if (previousAmount > 1) {
         return (previousAmount -= 1);
       } else {
-        return (previousAmount = 1);
+        return (previousAmount = 0);
       }
     })
   }
@@ -157,8 +157,8 @@ export default function AddToCartInfo(props) {
           <p className="company">{props.company}</p>
           <p className="name">{props.name}</p>
           <p className="description">{props.description}</p>
-          <p className="price">{props.price}</p>
-          <p className="discount">{props.currentPrice}</p>
+          <p className="price">{`$${props.price}`}</p>
+          <p className="discount">{`$${props.currentPrice}`}</p>
         </div>
       <InputStyles>
         <div className="inputDiv">

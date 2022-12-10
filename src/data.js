@@ -4,9 +4,10 @@ export const productInfo = [
     company: 'THE BEST SHOE COMPANY',
     name: 'Super Cool Shoes',
     description: 'These limited edition unbeliveable cool shoes are our best product yet. Buy them and you will feel like you are walking on clouds',
-    price: '$250',
-    currentPrice: '$125',
+    price: 250,
+    currentPrice: 125,
     amount: 0,
+    totalPrice: 0,
     images: [
       {
         id: 0,

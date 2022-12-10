@@ -149,10 +149,16 @@ function App(props) {
   const [setProduct, isProduct] = useState(props.product);
 
   // add new amount to state
-  function addAmount(amount){
+  function addAmount(amount) {
     const newProduct = JSON.parse(JSON.stringify(setProduct));
+    const totalPrice = amount * newProduct[0].currentPrice;
     newProduct[0].amount = amount;
+    newProduct[0].totalPrice = totalPrice;
     isProduct(newProduct);
+  }
+
+  function deleteItem(e) {
+    console.log(e.target);
   }
   
   const cart = setProduct.map(product => (
@@ -164,8 +170,10 @@ function App(props) {
       price={product.price}
       currentPrice={product.currentPrice}
       amount={product.amount}
+      totalPrice={product.totalPrice}
       images={product.images}
       key={product.id}
+      onClick={deleteItem}
     />
   ));
 
@@ -179,6 +187,7 @@ function App(props) {
       currentPrice={product.currentPrice}
       amount={product.amount}
       images={product.images}
+      totalPrice={product.totalPrice}
       key={product.id}
     />
   ));
@@ -193,6 +202,7 @@ function App(props) {
       currentPrice={product.currentPrice}
       amount={product.amount}
       images={product.images}
+      totalPrice={product.totalPrice}
       key={product.id}
       onClick={addAmount}
     />

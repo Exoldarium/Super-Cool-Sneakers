@@ -12,7 +12,7 @@ const HamburgerStyles = styled.div`
     .hamburger-menu {
       position: absolute;
       width: 25vh;
-      background: var(--greyishBlue);
+      background: var(--lightGreyishBlue);
       border-radius: 4px;
       border: 1px solid var(--lightboxBlack);
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
