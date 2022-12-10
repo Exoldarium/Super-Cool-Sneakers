@@ -83,6 +83,7 @@ const ProductStyles = styled.div`
 const NavbarStyles = styled.nav`
   background: white;
   margin: 0 auto;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;

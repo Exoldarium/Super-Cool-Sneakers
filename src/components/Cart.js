@@ -17,7 +17,17 @@ const CartStyles = styled.div`
   .cart:hover {
     scale: 1.2;
   }
-  .img, button, div {
+  button {
+    border: none;
+    background: none;
+  }
+  .img, div {
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  .cartButton {
     cursor: pointer;
     padding: 0;
     border: none;
@@ -95,6 +105,7 @@ const CartStyles = styled.div`
     color: var(--lightGreyishBlue);
     text-align: center;
     font-weight: bold;
+    border: none;
   }
   .totalPriceSpan {
     font-weight: bold;
@@ -104,6 +115,17 @@ const CartStyles = styled.div`
   .cartAmountDiv {
     height: fit-content;
     margin: 0;
+  }
+  .amountBubble {
+    position: absolute;
+    left: 25px;
+    bottom: 32px;
+    border-radius: 20px;
+    background: var(--orange);
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    color: var(--lightGreyishBlue);
   }
   @media only screen and (max-width: 790px) {
     .cart-menu {
@@ -175,16 +197,27 @@ const CartStyles = styled.div`
       font-weight: bold;
       margin-left: 5px;
     }
+    .amountBubble {
+      position: absolute;
+      left: 25px;
+      bottom: 32px;
+      border-radius: 20px;
+      background: var(--orange);
+      width: 20px;
+      height: 20px;
+      font-size: 15px;
+      color: var(--lightGreyishBlue);
+    }
   }
 `;
 
 export default function Cart(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  // check the amount if zero render empty cart, if not render product
   const [isAmountActive, setAmountIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
 
+  // check the amount if zero render empty cart, if not render product
   const isAmount = (
     <div className="cartAmountDiv">
       <span className="imgSpan">
@@ -210,6 +243,20 @@ export default function Cart(props) {
       <p>Your cart is empty</p>
     </div>
   );
+  
+  // check the amount if > 0 add amount on top of cart
+  const showAmountOnCart = (
+    <button onClick={onClick} className="cartButton">
+      <span className="amountBubble">{props.amount}</span>
+      <img src={cartImage} alt="cart" className="cart"/>
+    </button>
+  );
+
+  const noAmountOnCart = (
+      <button onClick={onClick} className="cartButton">
+        <img src={cartImage} alt="cart" className="cart"/>
+      </button>
+  );
 
   useEffect(() => {
     if(props.amount >= 1) {
@@ -223,9 +270,7 @@ export default function Cart(props) {
   return (
     <CartStyles>
       <div ref={dropdownRef}>
-        <button onClick={onClick}>
-          <img src={cartImage} alt="cart" className="cart"/>
-        </button>
+        {isAmountActive ? showAmountOnCart : noAmountOnCart}
         <nav className={`cart-menu ${isActive ? 'active' : 'inactive'}`}>
           <ul>
             <span className="cartTitle">Cart</span>
