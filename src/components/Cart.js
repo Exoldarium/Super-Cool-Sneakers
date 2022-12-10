@@ -4,6 +4,7 @@ import styled from "styled-components";
 import cartImage from '../images/icon-cart.svg';
 import deleteIcon from '../images/icon-delete.svg'
 import { useState } from "react";
+import { useEffect } from "react";
 
 const CartStyles = styled.div`
   margin: 0;
@@ -100,6 +101,10 @@ const CartStyles = styled.div`
     margin-left: 5px;
     margin: 5px;
   }
+  .cartAmountDiv {
+    height: fit-content;
+    margin: 0;
+  }
   @media only screen and (max-width: 790px) {
     .cart-menu {
       position: absolute;
@@ -176,7 +181,44 @@ const CartStyles = styled.div`
 export default function Cart(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  // check the amount if zero render empty cart, if not render product
+  const [isAmountActive, setAmountIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
+
+  const isAmount = (
+    <div className="cartAmountDiv">
+      <span className="imgSpan">
+        <img src={props.images[0].image} alt="shoesImage" className="cartProductImage"/>
+      </span>
+      <span className="paragraphSpan">
+        <p className="paragraphInfo">{props.name}</p>
+        <p className="paragraphInfo">{`$${props.currentPrice}`}x{props.amount}<span className="totalPriceSpan">{`$${props.totalPrice}`}</span></p>
+      </span>
+      <span className="deleteButtonSpan">
+        <button>
+          <img src={deleteIcon} alt="deleteIcon" className="deleteItem"/>
+        </button>
+      </span>  
+      <span className="buttonSpan">
+        <button className="checkout">Checkout</button>
+      </span>
+    </div>
+  );
+
+  const noAmount = (
+    <div className="cartAmountDiv">
+      <p>Your cart is empty</p>
+    </div>
+  );
+
+  useEffect(() => {
+    if(props.amount >= 1) {
+      setAmountIsActive(true);
+    }
+    if(props.amount === 0) {
+      setAmountIsActive(false);
+    }
+  }, [props.amount]);
 
   return (
     <CartStyles>
@@ -188,22 +230,8 @@ export default function Cart(props) {
           <ul>
             <span className="cartTitle">Cart</span>
             <li>
-              <span className="imgSpan">
-                <img src={props.images[0].image} alt="shoesImage" className="cartProductImage"/>
-              </span>
-              <span className="paragraphSpan">
-                <p className="paragraphInfo">{props.name}</p>
-                <p className="paragraphInfo">{`$${props.currentPrice}`}x{props.amount}<span className="totalPriceSpan">{`$${props.totalPrice}`}</span></p>
-              </span>
-              <span className="deleteButtonSpan">
-                <button>
-                  <img src={deleteIcon} alt="deleteIcon" className="deleteItem"/>
-                </button>
-              </span>  
+              {isAmountActive ? isAmount : noAmount}
             </li>
-            <span className="buttonSpan">
-              <button className="checkout">Checkout</button>
-            </span>
           </ul>
         </nav>
       </div>
