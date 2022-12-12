@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Account from './components/Account';
 import AddToCartInfo from './components/AddToCartInfo';
@@ -28,7 +28,6 @@ const GlobalStyles = createGlobalStyle`
     --bs: 0 12px 24px 0 rgba(0, 0, 0, 0.09); // global box-shadow
     box-sizing: border-box;
   }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0;
@@ -37,24 +36,19 @@ const GlobalStyles = createGlobalStyle`
     line-height: 2;
     background: white;
   }
-
   *, *::before, *:after {
     box-sizing: inherit; // adding padding to an element will take away from the size instead of growing it
   }
-
   a {
     text-decoration: none;
     color: var(--black);
   }
-
   a:hover {
     text-decoration: underline;
   }
-
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-
 `;
 
 const ProductStyles = styled.div`
@@ -147,18 +141,28 @@ const InnerDivStyles = styled.div`
 `;
 
 function App(props) {
-  const [setProduct, isProduct] = useState(props.product);
+  const [isProduct, setProduct] = useState(props.product);
+  const [isPreviousAmount, setPreviousAmount] = useState('');
 
-  // add new amount to state
-  function addAmount(amount) {
-    const newProduct = JSON.parse(JSON.stringify(setProduct));
-    const totalPrice = amount * newProduct[0].currentPrice;
-    newProduct[0].amount = amount;
-    newProduct[0].totalPrice = totalPrice;
-    isProduct(newProduct);
+  // add new amount to state but account the previous amount too
+  function addProduct(productAmount) {
+    const newProduct = JSON.parse(JSON.stringify(isProduct));
+    const totalPrice = productAmount * newProduct[0].currentPrice;
+    newProduct[0].amount = productAmount + isPreviousAmount;
+    newProduct[0].id = 1;
+
+    if (newProduct[0].amount === 0) {
+      newProduct[0].totalPrice = totalPrice;
+    }
+    if (newProduct[0].amount >= 1) {
+      newProduct[0].totalPrice = newProduct[0].amount * newProduct[0].currentPrice;
+    }
+
+    setProduct(newProduct);
+    setPreviousAmount(parseFloat(newProduct[0].amount));
   }
-  
-  const cart = setProduct.map(product => (
+
+  const cart = isProduct.map(product => (
     <Cart 
       id={product.id}
       company={product.company}
@@ -173,7 +177,7 @@ function App(props) {
     />
   ));
 
-  const carousel = setProduct.map(product => (
+  const carousel = isProduct.map(product => (
     <Carousel 
       id={product.id}
       company={product.company}
@@ -188,7 +192,7 @@ function App(props) {
     />
   ));
 
-  const addToCartInfo = setProduct.map(product => (
+  const addToCartInfo = isProduct.map(product => (
     <AddToCartInfo 
       id={product.id}
       company={product.company}
@@ -200,7 +204,7 @@ function App(props) {
       images={product.images}
       totalPrice={product.totalPrice}
       key={product.id}
-      onClick={addAmount}
+      onClick={addProduct}
     />
   ));
 

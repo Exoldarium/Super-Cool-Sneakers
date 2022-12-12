@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import iconMinus from "../images/icon-minus.svg";
 import iconPlus from '../images/icon-plus.svg';
 
 const InfoDivStyles = styled.div`
+  margin-right: 15px;
   .itemsDiv {
     text-align: left;
     margin-bottom: 20px;
@@ -127,12 +127,12 @@ const InputStyles = styled.div`
 `;
 
 export default function AddToCartInfo(props) {
-  const [isAmount, setAmount] = useState(0);
+  const [isAmount, setAmount] = useState(1);
 
   // on click set new amount to be sent to parent component
-  function handleClick() {
+  function handleAddProduct() {
     props.onClick(isAmount);
-    setAmount(0);
+    setAmount(1);
   }
 
   // on button click increase amount
@@ -146,7 +146,7 @@ export default function AddToCartInfo(props) {
       if (previousAmount > 1) {
         return (previousAmount -= 1);
       } else {
-        return (previousAmount = 0);
+        return (previousAmount = 1);
       }
     })
   }
@@ -169,7 +169,7 @@ export default function AddToCartInfo(props) {
           <button className="buttonPlus" onClick={increaseAmountOnClick}>
             <img src={iconPlus} alt="iconPlus"/>
           </button>
-          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleClick}></input>
+          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleAddProduct}></input>
           <label htmlFor="submit">Add to Cart</label>
         </div>
       </InputStyles>

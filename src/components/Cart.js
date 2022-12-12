@@ -106,6 +106,7 @@ const CartStyles = styled.div`
     text-align: center;
     font-weight: bold;
     border: none;
+    cursor: pointer;
   }
   .totalPriceSpan {
     font-weight: bold;
@@ -115,6 +116,7 @@ const CartStyles = styled.div`
   .cartAmountDiv {
     height: fit-content;
     margin: 0;
+    cursor: default;
   }
   .amountBubble {
     position: absolute;
@@ -126,6 +128,9 @@ const CartStyles = styled.div`
     height: 20px;
     font-size: 15px;
     color: var(--lightGreyishBlue);
+  }
+  .removeProductButton {
+    cursor: pointer;
   }
   @media only screen and (max-width: 790px) {
     .cart-menu {
@@ -146,70 +151,8 @@ const CartStyles = styled.div`
       visibility: visible;
       height: fit-content;
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      cursor: default;
-    }
-    li {
-      border-top: 1px solid black;
-      cursor: default;
-    }
-    .cartProductImage {
-      width: auto;
-      height: 50px;
-      border-radius: 5px;
-    }
-    .imgSpan {
-      display: inline-block;
-      flex-direction: row;
-      margin: 5px;
-    }
-    .paragraphInfo {
-      margin: 0;
-    }
-    .paragraphSpan {
-      display: inline-block;
-      margin: 5px;
-      text-align: left;
-      line-height: 33px;
-    }
-    .deleteItem {
-      display: inline-block;
-      padding: 10px;
-      margin: 5px;
-    }
-    .checkout {
-      width: 20em;
-      height: 3em;
-      background: var(--orange);
-      margin: 5px;
-      margin-bottom: 20px;
-      border-radius: 4px;
-      font-weight: bold;
-      color: var(--lightGreyishBlue);
-      font-weight: bold;
-    }
-    .totalPriceSpan {
-      font-weight: bold;
-      margin-left: 5px;
-    }
-    .amountBubble {
-      position: absolute;
-      left: 25px;
-      bottom: 32px;
-      border-radius: 20px;
-      background: var(--orange);
-      width: 20px;
-      height: 20px;
-      font-size: 15px;
-      color: var(--lightGreyishBlue);
-    }
   }
-`;
+  `;
 
 export default function Cart(props) {
   const dropdownRef = useRef(null);
@@ -217,6 +160,18 @@ export default function Cart(props) {
   const [isAmountActive, setAmountIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
 
+  // add a button to close the cart menu instead on clicking outside of the element
+  
+  useEffect(() => {
+    if(props.amount >= 1) {
+      setAmountIsActive(true);
+    }
+    if(props.amount === 0) {
+      setAmountIsActive(false);
+    }
+  }, [props.amount]);
+  
+  
   // check the amount if zero render empty cart, if not render product
   const isAmount = (
     <div className="cartAmountDiv">
@@ -228,7 +183,7 @@ export default function Cart(props) {
         <p className="paragraphInfo">{`$${props.currentPrice}`}x{props.amount}<span className="totalPriceSpan">{`$${props.totalPrice}`}</span></p>
       </span>
       <span className="deleteButtonSpan">
-        <button>
+        <button className="removeProductButton">
           <img src={deleteIcon} alt="deleteIcon" className="deleteItem"/>
         </button>
       </span>  
@@ -237,7 +192,7 @@ export default function Cart(props) {
       </span>
     </div>
   );
-
+  
   const noAmount = (
     <div className="cartAmountDiv">
       <p>Your cart is empty</p>
@@ -251,21 +206,12 @@ export default function Cart(props) {
       <img src={cartImage} alt="cart" className="cart"/>
     </button>
   );
-
+  
   const noAmountOnCart = (
-      <button onClick={onClick} className="cartButton">
+    <button onClick={onClick} className="cartButton">
         <img src={cartImage} alt="cart" className="cart"/>
       </button>
   );
-
-  useEffect(() => {
-    if(props.amount >= 1) {
-      setAmountIsActive(true);
-    }
-    if(props.amount === 0) {
-      setAmountIsActive(false);
-    }
-  }, [props.amount]);
 
   return (
     <CartStyles>
