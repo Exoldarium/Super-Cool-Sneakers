@@ -72,7 +72,6 @@ const Avatarstyles = styled.div`
       display: flex;
       opacity: 0;
       visibility: hidden;
-      left: -8.5em;
       margin: 0;
       align-items: center;
       top: 2.3em;
@@ -82,6 +81,7 @@ const Avatarstyles = styled.div`
       opacity: 1;
       margin-right: 0;
       visibility: visible;
+      left: -8.5em;
       z-index: 1;
     }
     ul {
