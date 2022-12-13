@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Exoldarium/Super-Cool-Sneakers/static/js/main.5605c48c.js",
+    "main.js": "/Exoldarium/Super-Cool-Sneakers/static/js/main.e9f5237f.js",
     "static/js/787.28cb0dcd.chunk.js": "/Exoldarium/Super-Cool-Sneakers/static/js/787.28cb0dcd.chunk.js",
     "static/media/image-avatar.JPG": "/Exoldarium/Super-Cool-Sneakers/static/media/image-avatar.4d6c4770cd0b28934fcf.JPG",
     "static/media/logo.svg": "/Exoldarium/Super-Cool-Sneakers/static/media/logo.4fe9c1e86cf9bf600f0c239f6a6e5317.svg",
@@ -13,10 +13,10 @@
     "static/media/icon-menu.svg": "/Exoldarium/Super-Cool-Sneakers/static/media/icon-menu.c6107d03f1edcf73523ebd8cbc50a443.svg",
     "static/media/icon-previous.svg": "/Exoldarium/Super-Cool-Sneakers/static/media/icon-previous.80616402c611cc0a6651d0b751da8a9b.svg",
     "static/media/icon-next.svg": "/Exoldarium/Super-Cool-Sneakers/static/media/icon-next.9621183a551a9985b4bd7536c9a69c66.svg",
-    "main.5605c48c.js.map": "/Exoldarium/Super-Cool-Sneakers/static/js/main.5605c48c.js.map",
+    "main.e9f5237f.js.map": "/Exoldarium/Super-Cool-Sneakers/static/js/main.e9f5237f.js.map",
     "787.28cb0dcd.chunk.js.map": "/Exoldarium/Super-Cool-Sneakers/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.5605c48c.js"
+    "static/js/main.e9f5237f.js"
   ]
 }
