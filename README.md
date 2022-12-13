@@ -34,7 +34,7 @@ npx create-react-app my-app
 cd my-app
 npm run start
 ```
-Styled [Styled-components](https://styled-components.com/)
+[Styled-components](https://styled-components.com/)
 ```bash
 npm install --save styled-components
 ```
