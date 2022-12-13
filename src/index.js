@@ -6,9 +6,7 @@ import { productInfo } from './data';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <App product={productInfo}/>
-  </React.StrictMode>
 );
 
 reportWebVitals();
