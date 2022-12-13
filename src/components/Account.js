@@ -45,7 +45,7 @@ const Avatarstyles = styled.div`
     visibility: hidden;
     border: 1px solid var(--lightboxBlack);
     top: 2.7em;
-    right: 0.1em;
+    left: 0.2em;
     position: absolute;
     width: 7em;
   }
