@@ -149,7 +149,6 @@ function App(props) {
     const newProduct = JSON.parse(JSON.stringify(isProduct));
     const totalPrice = productAmount * newProduct[0].currentPrice;
     newProduct[0].amount = productAmount + isPreviousAmount;
-    newProduct[0].id = 1;
 
     if (newProduct[0].amount === 0) {
       newProduct[0].totalPrice = totalPrice;
@@ -157,9 +156,16 @@ function App(props) {
     if (newProduct[0].amount >= 1) {
       newProduct[0].totalPrice = newProduct[0].amount * newProduct[0].currentPrice;
     }
-
     setProduct(newProduct);
     setPreviousAmount(parseFloat(newProduct[0].amount));
+  }
+
+  // remove product from cart and set previous amount to 0
+  function removeItem() {
+    const removeProduct = JSON.parse(JSON.stringify(isProduct));
+    removeProduct[0].amount = 0;
+    setProduct(removeProduct);
+    setPreviousAmount(0);
   }
 
   const cart = isProduct.map(product => (
@@ -174,6 +180,7 @@ function App(props) {
       totalPrice={product.totalPrice}
       images={product.images}
       key={product.id}
+      onClickRemoveItem={removeItem}
     />
   ));
 

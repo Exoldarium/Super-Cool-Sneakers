@@ -1,8 +1,7 @@
-import { useRef } from "react";
-import { useDetectOutsideClick } from "../useDetectOutsideClick";
 import styled from "styled-components";
 import cartImage from '../images/icon-cart.svg';
-import deleteIcon from '../images/icon-delete.svg'
+import deleteIcon from '../images/icon-delete.svg';
+import closeMenu from '../images/icon-close.svg';
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -38,33 +37,31 @@ const CartStyles = styled.div`
     width: auto;
     margin-right: 5px;
   }
-  .cart-menu {
+  .cartMenu.active {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 15em;
     top: 2.5em;
     right: 0.1em;
     background: var(--lightGreyishBlue);
     border-radius: 4px;
     box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    border: 1px solid var(--lightboxBlack);
-    width: 8em;
-  }
-  .cart-menu.active {
     opacity: 1;
     visibility: visible;
-    width: 15em;
-    height: fit-content;
+    border: 1px solid var(--lightboxBlack);
+  }
+  .cartMenu.hidden {
+    display: none;
+  }
+  .closeCartMenu {
+    position: absolute;
+    left: 20em;
+    top: 0.5em;
+    cursor: pointer;
   }
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
     cursor: default;
   }
   li {
@@ -155,12 +152,9 @@ const CartStyles = styled.div`
   `;
 
 export default function Cart(props) {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [isAmountActive, setAmountIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
-
-  // add a button to close the cart menu instead on clicking outside of the element
+  const [isMenuActive, setMenuIsActive] = useState(false);
+  const onClick = () => setMenuIsActive(!isMenuActive);
   
   useEffect(() => {
     if(props.amount >= 1) {
@@ -183,7 +177,7 @@ export default function Cart(props) {
         <p className="paragraphInfo">{`$${props.currentPrice}`}x{props.amount}<span className="totalPriceSpan">{`$${props.totalPrice}`}</span></p>
       </span>
       <span className="deleteButtonSpan">
-        <button className="removeProductButton">
+        <button className="removeProductButton" onClick={() => props.onClickRemoveItem()}>
           <img src={deleteIcon} alt="deleteIcon" className="deleteItem"/>
         </button>
       </span>  
@@ -201,25 +195,28 @@ export default function Cart(props) {
   
   // check the amount if > 0 add amount on top of cart
   const showAmountOnCart = (
-    <button onClick={onClick} className="cartButton">
+    <button className="cartButton" onClick={onClick}>
       <span className="amountBubble">{props.amount}</span>
       <img src={cartImage} alt="cart" className="cart"/>
     </button>
   );
   
   const noAmountOnCart = (
-    <button onClick={onClick} className="cartButton">
+    <button className="cartButton" onClick={onClick}>
         <img src={cartImage} alt="cart" className="cart"/>
       </button>
   );
 
   return (
     <CartStyles>
-      <div ref={dropdownRef}>
+      <div>
         {isAmountActive ? showAmountOnCart : noAmountOnCart}
-        <nav className={`cart-menu ${isActive ? 'active' : 'inactive'}`}>
+        <nav className={`cartMenu ${isMenuActive ? 'active' : 'hidden'}`}>
           <ul>
             <span className="cartTitle">Cart</span>
+            <button className="closeCartMenu" onClick={onClick}>
+              <img src={closeMenu} alt="closeCart"/>
+            </button>
             <li>
               {isAmountActive ? isAmount : noAmount}
             </li>
