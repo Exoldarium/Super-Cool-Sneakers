@@ -1,6 +1,7 @@
 # Sneakers Product Page
 
 A product page made with React
+
 [Website](https://exoldarium.github.io/Super-Cool-Sneakers/)
 
 ## Description
