@@ -36,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: 2;
     background: white;
   }
-  *, *::before, *:after {
+  *, *:before, *:after {
     box-sizing: inherit; // adding padding to an element will take away from the size instead of growing it
   }
   a {
