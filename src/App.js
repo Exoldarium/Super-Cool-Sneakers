@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Account from './components/Account';
 import AddToCartInfo from './components/AddToCartInfo';

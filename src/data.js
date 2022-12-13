@@ -11,19 +11,19 @@ export const productInfo = [
     images: [
       {
         id: 0,
-        image: 'image-product-1.jpg',
+        image: process.env.PUBLIC_URL + 'image-product-1.jpg',
       }, 
       {
         id: 1,
-        image: 'image-product-2.jpg',
+        image: process.env.PUBLIC_URL + 'image-product-2.jpg',
       },
       {
         id: 2,
-        image: 'image-product-3.jpg',
+        image: process.env.PUBLIC_URL + 'image-product-3.jpg',
       },
       {
         id: 3,
-        image: 'image-product-4.jpg',
+        image: process.env.PUBLIC_URL + 'image-product-4.jpg',
       }
     ]
 }];
