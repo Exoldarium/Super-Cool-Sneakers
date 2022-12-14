@@ -20,7 +20,7 @@ const HamburgerStyles = styled.div`
       margin: 0;
       align-items: flex-start;
       top: 2em;
-      z-index: 1;
+      z-index: 2;
     }
     .hamburger-menu.hidden {
       display: none;

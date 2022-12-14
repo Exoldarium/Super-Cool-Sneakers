@@ -48,6 +48,7 @@ const CartStyles = styled.div`
     opacity: 1;
     visibility: visible;
     border: 1px solid var(--lightboxBlack);
+    z-index: 1;
   }
   .cartMenu.hidden {
     display: none;
@@ -130,7 +131,7 @@ const CartStyles = styled.div`
     cursor: pointer;
   }
   @media only screen and (max-width: 790px) {
-    .cart-menu {
+    /* .cart-menu {
       position: absolute;
       top: 2.5em;
       right: 0.1em;
@@ -142,12 +143,13 @@ const CartStyles = styled.div`
       visibility: hidden;
       border: 1px solid var(--lightboxBlack);
       width: 8em;
+      z-index: 0;
     }
     .cart-menu.active {
       opacity: 1;
       visibility: visible;
       height: fit-content;
-    }
+    } */
     .cart {
       height: 30px;
       width: auto;

@@ -77,7 +77,7 @@ const Avatarstyles = styled.div`
       top: 2.3em;
       left: -7em;
       justify-content: center;
-      z-index: 1;
+      z-index: 2;
     }
     .avatar-menu.hidden {
       display: none;
