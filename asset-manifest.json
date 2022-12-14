@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Super-Cool-Sneakers/static/js/main.5dd58635.js",
+    "main.js": "/Super-Cool-Sneakers/static/js/main.af910b01.js",
     "static/media/image-avatar.JPG": "/Super-Cool-Sneakers/static/media/image-avatar.4d6c4770cd0b28934fcf.JPG",
     "static/media/logo.svg": "/Super-Cool-Sneakers/static/media/logo.4fe9c1e86cf9bf600f0c239f6a6e5317.svg",
     "static/media/icon-delete.svg": "/Super-Cool-Sneakers/static/media/icon-delete.1fd1f1f7d9f8ce5557b44ca3470a18b8.svg",
@@ -12,9 +12,9 @@
     "static/media/icon-menu.svg": "/Super-Cool-Sneakers/static/media/icon-menu.c6107d03f1edcf73523ebd8cbc50a443.svg",
     "static/media/icon-previous.svg": "/Super-Cool-Sneakers/static/media/icon-previous.80616402c611cc0a6651d0b751da8a9b.svg",
     "static/media/icon-next.svg": "/Super-Cool-Sneakers/static/media/icon-next.9621183a551a9985b4bd7536c9a69c66.svg",
-    "main.5dd58635.js.map": "/Super-Cool-Sneakers/static/js/main.5dd58635.js.map"
+    "main.af910b01.js.map": "/Super-Cool-Sneakers/static/js/main.af910b01.js.map"
   },
   "entrypoints": [
-    "static/js/main.5dd58635.js"
+    "static/js/main.af910b01.js"
   ]
 }
