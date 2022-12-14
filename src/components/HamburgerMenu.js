@@ -8,33 +8,26 @@ const HamburgerStyles = styled.div`
   @media only screen and (max-width: 790px) {
     display: flex;
     position: relative;
-    flex: 1 1 0;
-    .hamburger-menu {
+    .hamburger-menu.active {
       position: absolute;
-      width: 25vh;
+      width: 45vw;
+      height: 100vh;
       background: var(--lightGreyishBlue);
-      border-radius: 4px;
       border: 1px solid var(--lightboxBlack);
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
       display: flex;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      margin: 0;
-      align-items: center;
-    }
-    .hamburger-menu.active {
-      opacity: 1;
-      top: 2em;
-      visibility: visible;
-      position: absolute;
-      display: flex;
       justify-content: flex-start;
+      margin: 0;
+      align-items: flex-start;
+      top: 2em;
       z-index: 1;
+    }
+    .hamburger-menu.hidden {
+      display: none;
     }
     img {
       width: auto;
-      height: 30px;
+      height: 25px;
     }
     button {
       background: none;
@@ -42,6 +35,8 @@ const HamburgerStyles = styled.div`
       cursor: pointer;
     }
     ul {
+      font-size: 22px;
+      margin: 0;
       height: 100vh;
       list-style: none;
       display: flex;
@@ -65,7 +60,7 @@ export default function HamburgerMenu() {
         <button onClick={onClick}>
           <img src={hamburger} alt="menuicon"/>
         </button>
-        <nav className={`hamburger-menu ${isActive ? 'active' : 'inactive'}`}>
+        <nav className={`hamburger-menu ${isActive ? 'active' : 'hidden'}`}>
           <ul>
             <li>        
               <a href="#">

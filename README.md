@@ -14,7 +14,7 @@ in the future especially if I decide to make a full website. All of the images w
 Originally, I decided to import all of my data through data.js file but when i realized that I will have to move data between components and had to change my approach in order to learn how props could be used to accomplish this. 
 
 Most of the menus were originally closed on button click but I realized that
-the same functionality could be accomplished through different state hooks and so I learned how to create my own hook that closes menus on clicking outside of the menu element and I am reusing for each menu that is present in the app.
+the same functionality could be accomplished through different state hooks and so I learned how to create my own hook that closes menus on clicking outside of the menu element and I am reusing the same hook for each menu that is present in the app.
 
 I also decided to go with [Styled-components](https://styled-components.com/) instead of using a CSS file. It gives me much better overview of my CSS and I can also componentize most of my classes.
 
@@ -38,7 +38,7 @@ npm run start
 ```bash
 npm install --save styled-components
 ```
-Images from [Frontendmentor](https://www.frontendmentor.io/)
+Images, design and inspiration from [Frontendmentor](https://www.frontendmentor.io/)
 
 ## License
 

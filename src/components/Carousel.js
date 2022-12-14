@@ -34,7 +34,7 @@ const ImageDivStyles = styled.div`
   @media only screen and (max-width: 790px) {
     .previousButtonMobile {
       position: absolute;
-      margin-top: 12em;
+      margin-top: 10em;
       margin-left: -2.5em;
       display: inline-block;
       cursor: pointer;
@@ -42,7 +42,7 @@ const ImageDivStyles = styled.div`
     }
     .nextButtonMobile {
       position: absolute;
-      margin-top: 12em;
+      margin-top: 10em;
       margin-left: 23em;
       display: inline-block;
       cursor: pointer;

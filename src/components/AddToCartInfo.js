@@ -38,18 +38,7 @@ const InfoDivStyles = styled.div`
     margin: 0;
   }
   @media only screen and (max-width: 790px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    .itemsDiv {
-      display: block;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: left;
-      margin-left: 10px;
-    }
+    margin: 0;
     .name {
       font-size: 30px;
       font-weight: bold;
@@ -72,6 +61,11 @@ const InfoDivStyles = styled.div`
       font-weight: bolder;
       margin: 0;
     }
+    .itemsDiv {
+      text-align: left;
+      padding: 10px;
+      margin: 0;
+    }
   }
 `;
 
@@ -79,9 +73,8 @@ const InputStyles = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: fit-content;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  max-height: 40px;
+  /* width: fit-content; */
+  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
   button {
     background: var(--greyishBlue);
     border: none;
@@ -114,14 +107,15 @@ const InputStyles = styled.div`
     cursor: pointer;
   }
   .inputDiv {
-      display: flex;
+    display: flex;
   }
   @media only screen and (max-width: 790px) {
     display: block;
-    height: 40px;
+    /* height: 40px; */
     margin: 0 auto;
     .inputDiv {
       display: flex;
+      justify-content: center;
     }
   }
 `;

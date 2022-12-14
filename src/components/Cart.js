@@ -148,6 +148,10 @@ const CartStyles = styled.div`
       visibility: visible;
       height: fit-content;
     }
+    .cart {
+      height: 30px;
+      width: auto;
+  }
   }
   `;
 

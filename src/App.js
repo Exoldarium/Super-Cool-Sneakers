@@ -27,6 +27,8 @@ const GlobalStyles = createGlobalStyle`
     --maxWidth: 1000px;
     --bs: 0 12px 24px 0 rgba(0, 0, 0, 0.09); // global box-shadow
     box-sizing: border-box;
+    min-height: 100vh;
+    min-width: 100vw;
   }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -35,6 +37,8 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.5rem;
     line-height: 2;
     background: white;
+    min-height: 100vh;
+    min-width: 100vw;
   }
   *, *:before, *:after {
     box-sizing: inherit; // adding padding to an element will take away from the size instead of growing it
@@ -57,7 +61,6 @@ const ProductStyles = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 100%;
   margin-top: 5em;
   div {
     flex: 1 1 0;
@@ -65,8 +68,7 @@ const ProductStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     display: block;
-    height: 100%;
-    margin-top: 2em;
+    margin: 0;
     div {
       flex: 1 1 0;
       text-align: center;
@@ -83,6 +85,9 @@ const NavbarStyles = styled.nav`
   align-items: center;
   border-bottom: 1px solid var(--lightboxBlack);
   @media only screen and (max-width: 790px) {
+    border-bottom: 1px solid black;
+    padding-top: 0.5em;
+    margin: 0;
     display: flex;
   }
 `;
@@ -110,12 +115,13 @@ const OuterDivStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     display: flex;
-    .hamburger {
-      display: flex;
-    }
+    justify-content: flex-end;
     .logoHeader {
       display: flex;
-      flex: 1 1 auto;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-bottom: 0.2em;
+      padding-left: 0.3em;
     }
   }
 `;

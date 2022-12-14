@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import AvatarImage from '../images/image-avatar.JPG';
 import { useDetectOutsideClick } from '../useDetectOutsideClick';
 
+// https://stackoverflow.com/questions/65361994/prevent-absolute-div-from-going-off-screen
+
 const Avatarstyles = styled.div`
   margin: 0;
   max-width: 2em;
@@ -61,36 +63,42 @@ const Avatarstyles = styled.div`
     margin: 0;
   }
   @media only screen and (max-width: 790px) {
-    .avatar-menu {
+    .avatar-menu.active {
       position: absolute;
-      width: 25vh;
+      width: 45vw;
       height: 100vh;
       background: var(--lightGreyishBlue);
-      border-radius: 4px;
+      border-radius: 0;
       border: 1px solid var(--lightboxBlack);
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
       display: flex;
-      opacity: 0;
-      visibility: hidden;
       margin: 0;
       align-items: center;
       top: 2.3em;
+      left: -7em;
       justify-content: center;
-    }
-    .avatar-menu.active {
-      opacity: 1;
-      margin-right: 0;
-      visibility: visible;
-      left: -8.5em;
       z-index: 1;
     }
+    .avatar-menu.hidden {
+      display: none;
+    }
+    .avatar {
+      border: 1px solid black;
+      border-radius: 30px;
+      height: 35px;
+      width: 35px;
+    }
+    button {
+      padding-top: 0.3em;
+    }
     ul {
+      font-size: 22px;
       height: 100vh;
       list-style: none;
       display: flex;
       flex-direction: column;
       padding-right: 0.3em;
-      justify-content: flex-start;
+      align-items: flex-start;
     }
   }
 `;
@@ -106,7 +114,7 @@ export default function Account() {
         <button onClick={onClick}>
           <img src={AvatarImage} alt="cart" className="avatar"/>
         </button>
-        <nav className={`avatar-menu ${isActive ? 'active' : 'inactive'}`}>
+        <nav className={`avatar-menu ${isActive ? 'active' : 'hidden'}`}>
           <ul>
             <a href='#'>
               <li>My Account</li>
