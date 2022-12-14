@@ -62,6 +62,7 @@ const ProductStyles = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-top: 5em;
+  padding-bottom: 70px;
   div {
     flex: 1 1 0;
     text-align: center;

@@ -39,7 +39,7 @@ const InfoDivStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     margin: 0;
-    padding-bottom: 70px;
+    /* padding-bottom: 70px; */
     .name {
       font-size: 30px;
       font-weight: bold;
