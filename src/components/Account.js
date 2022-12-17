@@ -4,6 +4,8 @@ import AvatarImage from '../images/image-avatar.JPG';
 import { useDetectOutsideClick } from '../useDetectOutsideClick';
 
 // https://stackoverflow.com/questions/65361994/prevent-absolute-div-from-going-off-screen
+// add focus to the links
+// account for the menu margin
 
 const Avatarstyles = styled.div`
   margin: 0;
@@ -112,7 +114,7 @@ export default function Account() {
     <Avatarstyles>
       <div ref={dropdownRef}>
         <button onClick={onClick}>
-          <img src={AvatarImage} alt="cart" className="avatar"/>
+          <img src={AvatarImage} alt="displays user account" className="avatar"/>
         </button>
         <nav className={`avatar-menu ${isActive ? 'active' : 'hidden'}`}>
           <ul>

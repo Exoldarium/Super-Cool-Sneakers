@@ -230,7 +230,7 @@ function App(props) {
           <OuterDivStyles>
             <a href="#" className="header-link">
               <h1 className="logoHeader">
-                <img src={logo} alt="logo" className="logo"/>
+                <img src={logo} alt="website logo" className="logo"/>
               </h1>
             </a>
           </OuterDivStyles>

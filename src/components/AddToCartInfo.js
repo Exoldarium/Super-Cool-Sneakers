@@ -95,7 +95,12 @@ const InputStyles = styled.div`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   .cartInput {
-    display: none;
+    display: block;
+    height: 50px;
+    width: auto;
+    font-size: 20px;
+    color: var(--lightGreyishBlue);
+    background: var(--orange);
   }
   label {
     background: var(--orange);
@@ -158,14 +163,13 @@ export default function AddToCartInfo(props) {
       <InputStyles>
         <div className="inputDiv">
           <button className="buttonMinus" onClick={decreaseAmountOnClick}>
-            <img src={iconMinus} alt="iconMinus" />
+            <img src={iconMinus} alt="displays button that decreases the product amount on click" />
           </button>
           <span className="spanLabel">{isAmount}</span>
           <button className="buttonPlus" onClick={increaseAmountOnClick}>
-            <img src={iconPlus} alt="iconPlus"/>
+            <img src={iconPlus} alt="displays button that increases the product amount on click"/>
           </button>
-          <input type="submit" id="submit" className="cartInput" value={isAmount} onClick={handleAddProduct}></input>
-          <label htmlFor="submit">Add to Cart</label>
+          <button className="cartInput" onClick={handleAddProduct} value={isAmount}>Add to Cart</button>
         </div>
       </InputStyles>
     </InfoDivStyles> 

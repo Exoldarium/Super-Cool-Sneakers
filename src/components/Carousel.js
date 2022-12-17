@@ -159,18 +159,18 @@ export default function Carousel(props) {
       <div onClick={onClick}>
         {/* under 790px witdth */}
         <button className="previousButtonMobile" onClick={previousImageOnClick}>
-          <img src={previousButton} alt="nextButton"/>
+          <img src={previousButton} alt="displays a button that is used to change images"/>
         </button>
         <button className="nextButtonMobile" onClick={nextImageOnClick}>
-          <img src={nextButton} alt="previousButton"/>
+          <img src={nextButton} alt="displays a button that is used to change images"/>
         </button>
         <img src={props.images[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
         {/* over 790px witdth */}
-        <img src={imageActive} id={parsedImageId} alt="coolShoes" className="bigImage"/>
+        <img src={imageActive} id={parsedImageId} alt="display of white summer flat sneakers" className="bigImage"/>
       </div>
       <div className="smallImageDiv">
         {props.images.map(img => (
-          <img src={img.image} key={img.id} id={img.id} alt="coolShoes" className="smallImage"/>
+          <img src={img.image} key={img.id} id={img.id} alt="a gallery that display four same pairs of white sneakers displayed in different environments" className="smallImage"/>
         ))}
       </div>
       <OverlayStyles>
@@ -178,15 +178,15 @@ export default function Carousel(props) {
         <div className={`overlayDiv ${isOverlay ? 'overlay' : ''}`}>
           <div key={closeMenu.id} className="bigImageOver">
             <button onClick={onClick} className="closeMenu">
-              <img src={closeMenu} alt="closeMenu"/>
+              <img src={closeMenu} alt="displays button that is used to close the menu"/>
             </button>
             <button className="previousButton" onClick={previousImageOnClick}>
-              <img src={previousButton} alt="nextButton"/>
+              <img src={previousButton} alt="displays a button that is used to change images"/>
             </button>
             <button className="nextButton" onClick={nextImageOnClick}>
-              <img src={nextButton} alt="previousButton"/>
+              <img src={nextButton} alt="displays a button that is used to change images"/>
             </button>
-            <img src={props.images[parsedImageId].image} alt="coolShoes" className="overlayBigImage"/>
+            <img src={props.images[parsedImageId].image} alt="display of white summer flat sneakers" className="overlayBigImage"/>
           </div>
         </div>
       </OverlayStyles>
