@@ -156,7 +156,7 @@ export default function Carousel(props) {
   
   return (
     <ImageDivStyles>
-      <div onClick={onClick}>
+      <div className="bigImageDiv">
         {/* under 790px witdth */}
         <button className="previousButtonMobile" onClick={previousImageOnClick}>
           <img src={previousButton} alt="displays a button that is used to change images"/>
@@ -166,7 +166,7 @@ export default function Carousel(props) {
         </button>
         <img src={props.images[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
         {/* over 790px witdth */}
-        <img src={imageActive} id={parsedImageId} alt="display of white summer flat sneakers" className="bigImage"/>
+        <img src={imageActive} id={parsedImageId} alt="display of white summer flat sneakers" className="bigImage" onClick={onClick}/>
       </div>
       <div className="smallImageDiv">
         {props.images.map(img => (

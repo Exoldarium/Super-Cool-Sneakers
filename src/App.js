@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Account from './components/Account';
 import AddToCartInfo from './components/AddToCartInfo';
-import Carousel from './components/Carousel';
+import Gallery from './components/Gallery';
 import Cart from './components/Cart';
 import HamburgerMenu from './components/HamburgerMenu';
 import logo from './images/logo.svg';
@@ -62,7 +62,6 @@ const ProductStyles = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-top: 5em;
-  padding-bottom: 70px;
   div {
     flex: 1 1 0;
     text-align: center;
@@ -70,6 +69,7 @@ const ProductStyles = styled.div`
   @media only screen and (max-width: 790px) {
     display: block;
     margin: 0;
+    padding-bottom: 70px;
     div {
       flex: 1 1 0;
       text-align: center;
@@ -131,7 +131,7 @@ const InnerDivStyles = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   text-align: center;
   font-size: 17px;
   a {
@@ -192,7 +192,7 @@ function App(props) {
   ));
 
   const carousel = isProduct.map(product => (
-    <Carousel 
+    <Gallery 
       id={product.id}
       company={product.company}
       name={product.name}

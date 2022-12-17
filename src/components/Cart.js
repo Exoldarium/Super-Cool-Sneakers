@@ -41,7 +41,7 @@ const CartStyles = styled.div`
     position: absolute;
     width: 15em;
     top: 2.5em;
-    right: 0.1em;
+    right: 0.5em;
     background: var(--lightGreyishBlue);
     border-radius: 4px;
     box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
@@ -130,30 +130,29 @@ const CartStyles = styled.div`
   .removeProductButton {
     cursor: pointer;
   }
-  @media only screen and (max-width: 790px) {
-    /* .cart-menu {
+  @media only screen and (min-width: 790px) and (max-width: 1000px) {
+    .cartMenu.active {
       position: absolute;
+      width: 15em;
       top: 2.5em;
-      right: 0.1em;
+      right: 4em;
       background: var(--lightGreyishBlue);
       border-radius: 4px;
       box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      border: 1px solid var(--lightboxBlack);
-      width: 8em;
-      z-index: 0;
-    }
-    .cart-menu.active {
       opacity: 1;
       visibility: visible;
-      height: fit-content;
-    } */
+      border: 1px solid var(--lightboxBlack);
+      z-index: 1;
+    }
+  }
+  @media only screen and (max-width: 790px) {
     .cart {
       height: 30px;
       width: auto;
-  }
+    }
+    .cart:hover {
+      scale: 1;
+    }
   }
   `;
 

@@ -72,10 +72,8 @@ const InfoDivStyles = styled.div`
 
 const InputStyles = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  /* width: fit-content; */
-  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
+  margin: 0;
+  max-width: fit-content;
   button {
     background: var(--greyishBlue);
     border: none;
@@ -114,14 +112,23 @@ const InputStyles = styled.div`
   }
   .inputDiv {
     display: flex;
+    max-width: fit-content;
+    margin: 0;
   }
   @media only screen and (max-width: 790px) {
-    display: block;
-    /* height: 40px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     .inputDiv {
       display: flex;
       justify-content: center;
+      margin: 0;
+    }
+    .cartInput {
+      width: 15rem;
+      margin: 5px;
     }
   }
 `;
@@ -165,12 +172,12 @@ export default function AddToCartInfo(props) {
           <button className="buttonMinus" onClick={decreaseAmountOnClick}>
             <img src={iconMinus} alt="displays button that decreases the product amount on click" />
           </button>
-          <span className="spanLabel">{isAmount}</span>
+          <span className="spanLabel" aria-labelledby="product amount">{isAmount}</span>
           <button className="buttonPlus" onClick={increaseAmountOnClick}>
             <img src={iconPlus} alt="displays button that increases the product amount on click"/>
           </button>
-          <button className="cartInput" onClick={handleAddProduct} value={isAmount}>Add to Cart</button>
         </div>
+          <button className="cartInput" onClick={handleAddProduct} value={isAmount}>Add to Cart</button>
       </InputStyles>
     </InfoDivStyles> 
   )
