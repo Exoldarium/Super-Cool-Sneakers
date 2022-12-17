@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import AvatarImage from '../images/image-avatar.JPG';
 import { useDetectOutsideClick } from '../useDetectOutsideClick';
 
-// https://stackoverflow.com/questions/65361994/prevent-absolute-div-from-going-off-screen
-// add focus to the links
-// account for the menu margin
-
 const Avatarstyles = styled.div`
   margin: 0;
   max-width: 2em;

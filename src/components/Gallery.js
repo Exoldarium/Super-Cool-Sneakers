@@ -4,6 +4,8 @@ import closeMenu from '../images/icon-close.svg';
 import nextButton from '../images/icon-next.svg';
 import previousButton from '../images/icon-previous.svg';
 
+// add image focus depending which small image is clicked
+
 const ImageDivStyles = styled.div`
   .smallImageDiv {
     display: flex;
