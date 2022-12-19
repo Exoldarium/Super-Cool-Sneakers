@@ -16,6 +16,8 @@ Originally, I decided to import all of my data through data.js file but when i r
 Most of the menus were originally closed on button click but I realized that
 the same functionality could be accomplished through different state hooks so I learned how to create my own hook that closes menus on clicking outside of the menu element and I am reusing the same hook for each menu that is present in the app.
 
+One of the goals was to also make the page be accesible as much as possible so almost all of the features present on the page are usable with a mouse or with a keyboard. 
+
 I also decided to go with [Styled-components](https://styled-components.com/) instead of using a CSS file. It gives me much better overview of my CSS and I can also componentize most of my CSS classes.
 
 ## To-do's

@@ -141,7 +141,11 @@ export default function Gallery(props) {
     }
 
     smallImage.forEach(img => img.addEventListener('click', imageClick));
-    return () => smallImage.forEach(img => img.removeEventListener('click', imageClick));
+    smallImage.forEach(img => img.addEventListener('keyup', imageClick));
+    return () => {
+      smallImage.forEach(img => img.removeEventListener('click', imageClick));
+      smallImage.forEach(img => img.removeEventListener('keyup', imageClick));
+    }
   }, []);
 
   // scroll images forward
