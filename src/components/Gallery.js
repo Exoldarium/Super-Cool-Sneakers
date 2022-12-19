@@ -119,7 +119,7 @@ const OverlayStyles = styled.div`
   }
 `;
 
-export default function Carousel(props) {
+export default function Gallery(props) {
   // set image id
   const [imageId, setImageId] = useState(0);
   // set active image
