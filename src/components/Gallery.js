@@ -4,7 +4,7 @@ import closeMenu from '../images/icon-close.svg';
 import nextButton from '../images/icon-next.svg';
 import previousButton from '../images/icon-previous.svg';
 
-// add image focus depending which small image is clicked
+// add local storage
 
 const ImageDivStyles = styled.div`
   .smallImageDiv {
@@ -29,6 +29,10 @@ const ImageDivStyles = styled.div`
     margin: 5px;
     border-radius: 10px;
     cursor: pointer;
+    opacity: 0.2;
+  }
+  .smallImage.active {
+    opacity: 1;
   }
   .previousButtonMobile, .nextButtonMobile {
     display: none;
@@ -116,31 +120,33 @@ const OverlayStyles = styled.div`
 `;
 
 export default function Carousel(props) {
-  // set active image
-  const [imageActive, setImageActive] = useState(props.images[0].image);
-  // set overlay image id
+  // set image id
   const [imageId, setImageId] = useState(0);
+  // set active image
+  const [imageActive, setImageActive] = useState(props.images[imageId].image);
   // set overlay image
   const [isOverlay, setOverlay] = useState(false);
   const onClick = () => setOverlay(!isOverlay);
+  // make selected image not transparent
   const parsedImageId = parseFloat(imageId);
-
+  
   // set clicked image to be the main image
   useEffect(() => {
     const smallImage = document.querySelectorAll('.smallImage');
     function imageClick(e) {
-      if(e.target) {
+      if (e.target) {
         setImageActive(e.target.src);
         setImageId(e.target.id);
       }
     }
+
     smallImage.forEach(img => img.addEventListener('click', imageClick));
     return () => smallImage.forEach(img => img.removeEventListener('click', imageClick));
   }, []);
 
   // scroll images forward
   function nextImageOnClick() {
-    if(parsedImageId === 3) {
+    if (parsedImageId === 3) {
       setImageId(0);
     } else {
       setImageId(parsedImageId + 1);
@@ -149,13 +155,28 @@ export default function Carousel(props) {
 
   // scroll images back
   function previousImageOnClick() {
-    if(parsedImageId === 0) {
+    if (parsedImageId === 0) {
       setImageId(3);
     } else {
       setImageId(parsedImageId - 1);
     }
   }
-  
+
+  // add transparent effect for the clicked element, remove everywhere else  
+  function removeTransparentOnClick(e) {
+    const smallImage = document.querySelectorAll('.smallImage');
+    smallImage.forEach(img => img.classList.remove('active'));
+    if (e.target) {
+      e.target.classList.add('active');
+    } 
+  }
+
+  // remove transparent effect from first image on load
+  function removeTransparentOnLoad() {
+    const smallImage = document.querySelectorAll('.smallImage');
+    smallImage[0].classList.add('active');
+  }
+
   return (
     <ImageDivStyles>
       <div className="bigImageDiv">
@@ -166,13 +187,32 @@ export default function Carousel(props) {
         <button className="nextButtonMobile" onClick={nextImageOnClick}>
           <img src={nextButton} alt="displays a button that is used to change images"/>
         </button>
-        <img src={props.images[parsedImageId].image} id={imageId} alt="coolShoes" className="bigImagemobile"/>
+        <img 
+          src={props.images[parsedImageId].image} 
+          id={imageId} alt="coolShoes" 
+          className="bigImagemobile"
+        />
         {/* over 790px witdth */}
-        <img src={imageActive} id={parsedImageId} alt="display of white summer flat sneakers" className="bigImage" onClick={onClick}/>
+        <img 
+          src={imageActive} 
+          id={parsedImageId} 
+          alt="display of white summer flat sneakers" 
+          className="bigImage" onClick={onClick}
+        />
       </div>
       <div className="smallImageDiv">
         {props.images.map(img => (
-          <img src={img.image} key={img.id} id={img.id} alt="a gallery that display four same pairs of white sneakers displayed in different environments" className="smallImage"/>
+          <img 
+            src={img.image} 
+            key={img.id} 
+            id={img.id} 
+            alt="a gallery that display four same products displayed in different environments" 
+            className="smallImage"
+            tabIndex="0"
+            onClick={removeTransparentOnClick}
+            onKeyUp={removeTransparentOnClick}
+            onLoad={removeTransparentOnLoad}
+          />
         ))}
       </div>
       <OverlayStyles>
@@ -188,7 +228,11 @@ export default function Carousel(props) {
             <button className="nextButton" onClick={nextImageOnClick}>
               <img src={nextButton} alt="displays a button that is used to change images"/>
             </button>
-            <img src={props.images[parsedImageId].image} alt="display of white summer flat sneakers" className="overlayBigImage"/>
+            <img 
+              src={props.images[parsedImageId].image} 
+              alt="display of white summer flat sneakers" 
+              className="overlayBigImage"
+            />
           </div>
         </div>
       </OverlayStyles>
