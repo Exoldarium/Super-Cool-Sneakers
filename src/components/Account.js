@@ -56,18 +56,18 @@ const Avatarstyles = styled.div`
   }
   @media only screen and (min-width: 790px) and (max-width: 1000px) {
     .avatar-menu {
-    position: absolute;
-    background: var(--lightGreyishBlue);
-    border-radius: 4px;
-    box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-    visibility: hidden;
-    border: 1px solid var(--lightboxBlack);
-    top: 2.7em;
-    left: -4.2rem;
-    right: 0;
-    position: absolute;
-    width: 7em;
-  }
+      position: absolute;
+      background: var(--lightGreyishBlue);
+      border-radius: 4px;
+      box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
+      visibility: hidden;
+      border: 1px solid var(--lightboxBlack);
+      top: 2.7em;
+      left: -4.2rem;
+      right: 0;
+      position: absolute;
+      width: 7em;
+    }
   }
   @media only screen and (max-width: 790px) {
     .avatar-menu.active {

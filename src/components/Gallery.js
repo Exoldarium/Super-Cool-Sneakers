@@ -4,8 +4,6 @@ import closeMenu from '../images/icon-close.svg';
 import nextButton from '../images/icon-next.svg';
 import previousButton from '../images/icon-previous.svg';
 
-// add local storage
-
 const ImageDivStyles = styled.div`
   .smallImageDiv {
     display: flex;

@@ -170,7 +170,6 @@ export default function Cart(props) {
     }
   }, [props.amount]);
   
-  
   // check the amount if zero render empty cart, if not render product
   const isAmount = (
     <div className="cartAmountDiv">

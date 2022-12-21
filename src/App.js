@@ -149,13 +149,14 @@ const InnerDivStyles = styled.div`
 
 function App(props) {
   const [isProduct, setProduct] = useState(props.product);
-  const [isPreviousAmount, setPreviousAmount] = useState('');
+  const storedAmount = JSON.parse(sessionStorage.getItem('amount'));
+  const storedTotalPrice = JSON.parse(sessionStorage.getItem('totalPrice'));
 
   // add new amount to state but account the previous amount too
   function addProduct(productAmount) {
     const newProduct = JSON.parse(JSON.stringify(isProduct));
-    const totalPrice = productAmount * newProduct[0].currentPrice;
-    newProduct[0].amount = productAmount + isPreviousAmount;
+    const totalPrice = storedAmount * newProduct[0].currentPrice;
+    newProduct[0].amount = productAmount + storedAmount;
 
     if (newProduct[0].amount === 0) {
       newProduct[0].totalPrice = totalPrice;
@@ -164,7 +165,8 @@ function App(props) {
       newProduct[0].totalPrice = newProduct[0].amount * newProduct[0].currentPrice;
     }
     setProduct(newProduct);
-    setPreviousAmount(parseFloat(newProduct[0].amount));
+    sessionStorage.setItem('amount', newProduct[0].amount);
+    sessionStorage.setItem('totalPrice', newProduct[0].totalPrice);
   }
 
   // remove product from cart and set previous amount to 0
@@ -172,7 +174,8 @@ function App(props) {
     const removeProduct = JSON.parse(JSON.stringify(isProduct));
     removeProduct[0].amount = 0;
     setProduct(removeProduct);
-    setPreviousAmount(0);
+    sessionStorage.setItem('amount', 0);
+    sessionStorage.setItem('totalPrice', 0);
   }
 
   const cart = isProduct.map(product => (
@@ -183,15 +186,15 @@ function App(props) {
       description={product.description}
       price={product.price}
       currentPrice={product.currentPrice}
-      amount={product.amount}
-      totalPrice={product.totalPrice}
+      amount={storedAmount}
+      totalPrice={storedTotalPrice}
       images={product.images}
       key={product.id}
       onClickRemoveItem={removeItem}
     />
   ));
 
-  const carousel = isProduct.map(product => (
+  const gallery = isProduct.map(product => (
     <Gallery 
       id={product.id}
       company={product.company}
@@ -257,7 +260,7 @@ function App(props) {
           </OuterDivStyles>
         </NavbarStyles>
         <ProductStyles>
-          {carousel}
+          {gallery}
           {addToCartInfo}
         </ProductStyles>
     </>
