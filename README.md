@@ -4,10 +4,15 @@ A product page made with React
 
 [Website](https://exoldarium.github.io/Super-Cool-Sneakers/)
 
+![alt text](/public/CaptureSneakers.JPG)
+![alt text](/public/CaptureSneakers2.JPG)
+![alt text](/public/CaptureSneakers3.JPG)
+![alt text](/public/CaptureSneakers4.JPG)
+
 ## Description
 
 I made this small product page in order to practice React.js. I decided to make something that I could re-use
-in the future especially if I decide to make a full website. All of the images were taken from [Frontendmentor](https://www.frontendmentor.io/). It's a single page application and i only focus on adding the functionality to it. The user can browse through images, open an image gallery and add and remove product from the cart. The cart content also persists on reload. The page is using responsive design, so all of the functionality is present on the mobile and small-screen devices as well.
+in the future especially if I decide to make a full website. The images and the inspiration were taken from [Frontendmentor](https://www.frontendmentor.io/). It's a single page application and i only focus on adding the functionality to it. The user can browse through images, open an image gallery and add and remove product from the cart. The cart content also persists on reload. The page is using responsive design, so all of the functionality is present on the mobile and small-screen devices as well.
 
 ## Things I learned
 
